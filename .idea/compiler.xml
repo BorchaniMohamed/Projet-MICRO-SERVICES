@@ -24,6 +24,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="clientprojet-service" options="-parameters" />
       <module name="factureprojet-service" options="-parameters" />
+      <module name="payementprojet-service" options="-parameters" />
       <module name="produitprojet-service" options="-parameters" />
     </option>
   </component>
