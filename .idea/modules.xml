@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/clientprojet-service/clientprojet-service.iml" filepath="$PROJECT_DIR$/clientprojet-service/clientprojet-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/factureprojet-service/factureprojet-service.iml" filepath="$PROJECT_DIR$/factureprojet-service/factureprojet-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/microservices.iml" filepath="$PROJECT_DIR$/.idea/microservices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payementprojet-service/payementprojet-service.iml" filepath="$PROJECT_DIR$/payementprojet-service/payementprojet-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/produitprojet-service/produitprojet-service.iml" filepath="$PROJECT_DIR$/produitprojet-service/produitprojet-service.iml" />
     </modules>
   </component>
