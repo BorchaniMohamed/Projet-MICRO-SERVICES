@@ -1,13 +1,11 @@
 package org.ms.clientprojetservice.entities;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -15,7 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CustomerCategorie {
+public class CustomerCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

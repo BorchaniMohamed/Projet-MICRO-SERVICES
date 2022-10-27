@@ -2,13 +2,13 @@ package org.ms.clientprojetservice;
 
 
 import org.ms.clientprojetservice.entities.Customer;
-import org.ms.clientprojetservice.entities.CustomerCategorie;
+import org.ms.clientprojetservice.entities.CustomerCategory;
+import org.ms.clientprojetservice.repository.CustomerCategoryRepository;
+import org.ms.clientprojetservice.repository.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.ms.clientprojetservice.repository.CustomerCategorieRepository;
-import org.ms.clientprojetservice.repository.CustomerRepository;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
 import java.util.Date;
@@ -23,17 +23,19 @@ public class ClientprojetServiceApplication {
 
 	@Bean
 	CommandLineRunner start(CustomerRepository customerRepository,
-							CustomerCategorieRepository customerCategorieRepository,
+							CustomerCategoryRepository customerCategoryRepository,
 							RepositoryRestConfiguration repositoryRestConfiguration)
 	{
+		repositoryRestConfiguration.exposeIdsFor(Customer.class);
+		repositoryRestConfiguration.exposeIdsFor(CustomerCategory.class);
 		return args ->
 		{
 //Insérer trois clients de test dans la BD
-			CustomerCategorie categorie1 = customerCategorieRepository.save(new CustomerCategorie(null, "particulier"));
-			customerCategorieRepository.save(new CustomerCategorie(null,"entreprise"));
+			CustomerCategory categorie1 = customerCategoryRepository.save(new CustomerCategory(null, "particulier"));
+			customerCategoryRepository.save(new CustomerCategory(null,"entreprise"));
 
 			//Afficher les clients existants dans la BD
-			for (CustomerCategorie c : customerCategorieRepository.findAll())
+			for (CustomerCategory c : customerCategoryRepository.findAll())
 			{
 				System.out.println(c.toString());
 			}

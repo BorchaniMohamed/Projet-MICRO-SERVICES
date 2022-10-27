@@ -25,6 +25,6 @@ public class Customer {
     private String city;
     private String customerEmail;
     @ManyToOne(fetch = FetchType.EAGER)
-    CustomerCategorie customerCategorie;
+    CustomerCategory customerCategory;
 
 }
