@@ -22,7 +22,7 @@ public class Transaction {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="transaction_date",columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date transactionDate;
-    @OneToOne(fetch = FetchType.EAGER)//TODO : Modifier la relation payement invoice OnetoOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Invoice invoice;
     @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;

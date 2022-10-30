@@ -22,7 +22,7 @@ public class Invoice {
     @Column(name="invoice_date",columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date invoiceDate;
     @Column(name="states")
-    private String states;//TODO: ajouter states dans facture
+    private String states;
     @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
     @OneToMany(fetch = FetchType.LAZY)

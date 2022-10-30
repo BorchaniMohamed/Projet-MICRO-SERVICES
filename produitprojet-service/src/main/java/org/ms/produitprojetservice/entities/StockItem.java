@@ -15,12 +15,15 @@ public class StockItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name="name")
     private String stockItemName;
     private String brand;
     private String carateristique;
-    private double taxrate;
-    private double unitprice;
-    private int quantity;
+    private Double taxrate;
+    @Column(name="prix")
+    private Double unitprice;
+    @Column(name="qte")
+    private Integer quantity;
     @Temporal(TemporalType.DATE)
     private Date validTo;
     @Temporal(TemporalType.DATE)

@@ -1,17 +1,8 @@
 package org.ms.clientprojetservice;
 
 
-import org.ms.clientprojetservice.entities.Customer;
-import org.ms.clientprojetservice.entities.CustomerCategory;
-import org.ms.clientprojetservice.repository.CustomerCategoryRepository;
-import org.ms.clientprojetservice.repository.CustomerRepository;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-
-import java.util.Date;
 
 @SpringBootApplication
 public class ClientprojetServiceApplication {
@@ -21,7 +12,7 @@ public class ClientprojetServiceApplication {
 		SpringApplication.run(ClientprojetServiceApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	CommandLineRunner start(CustomerRepository customerRepository,
 							CustomerCategoryRepository customerCategoryRepository,
 							RepositoryRestConfiguration repositoryRestConfiguration)
@@ -45,6 +36,6 @@ public class ClientprojetServiceApplication {
 				System.out.println(c.toString());
 			}
 		};
-	}
+	}*/
 
 }
