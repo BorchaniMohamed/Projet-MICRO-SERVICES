@@ -9,13 +9,17 @@
         <outputRelativeToContentRoot value="true" />
         <module name="factureprojet-service" />
         <module name="payementprojet-service" />
+        <module name="eurekaprojet-service" />
         <module name="clientprojet-service" />
+        <module name="gatewayprojet-service" />
         <module name="produitprojet-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="clientprojet-service" target="1.8" />
+      <module name="eurekaprojet-service" target="1.8" />
       <module name="factureprojet-service" target="1.8" />
+      <module name="gatewayprojet-service" target="1.8" />
       <module name="payementprojet-service" target="1.8" />
       <module name="produitprojet-service" target="1.8" />
     </bytecodeTargetLevel>
@@ -23,7 +27,9 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="clientprojet-service" options="-parameters" />
+      <module name="eurekaprojet-service" options="-parameters" />
       <module name="factureprojet-service" options="-parameters" />
+      <module name="gatewayprojet-service" options="-parameters" />
       <module name="payementprojet-service" options="-parameters" />
       <module name="produitprojet-service" options="-parameters" />
     </option>

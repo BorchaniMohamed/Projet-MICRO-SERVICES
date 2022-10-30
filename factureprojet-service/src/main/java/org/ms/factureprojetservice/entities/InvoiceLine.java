@@ -1,7 +1,8 @@
 package org.ms.factureprojetservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.ms.factureprojetservice.entities.stockItem.StockItem;
+import org.ms.factureprojetservice.model.stockItem.StockItem;
 
 import javax.persistence.*;
 
@@ -16,11 +17,18 @@ public class InvoiceLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne
     private Invoice invoice;
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @Transient
     private StockItem stockItem;
+    private Long stockItemId;
+
     @Column(name="qte")
     private Integer quantity;
+
+
 
 }

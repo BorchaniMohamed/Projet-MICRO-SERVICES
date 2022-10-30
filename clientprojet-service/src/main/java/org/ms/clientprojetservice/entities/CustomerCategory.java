@@ -13,6 +13,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+
 public class CustomerCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

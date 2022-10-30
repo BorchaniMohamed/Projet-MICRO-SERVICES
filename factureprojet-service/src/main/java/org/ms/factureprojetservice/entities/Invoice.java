@@ -1,7 +1,8 @@
 package org.ms.factureprojetservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.ms.factureprojetservice.entities.customer.Customer;
+import org.ms.factureprojetservice.model.customer.Customer;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +25,9 @@ public class Invoice {
     private Date invoiceDate;
     @Column(name="states")
     private String states;//TODO: ajouter states dans facture
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Transient
     private Customer customer;
-    @OneToMany(fetch = FetchType.LAZY)
+    private Long customerId;
+    @OneToMany(mappedBy = "invoice" ,fetch = FetchType.LAZY)
     private List<InvoiceLine> invoiceLines = new ArrayList<>();
 }
