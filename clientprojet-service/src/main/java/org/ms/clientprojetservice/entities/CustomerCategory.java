@@ -3,6 +3,8 @@ package org.ms.clientprojetservice.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,5 +19,8 @@ public class CustomerCategory {
     private Long id;
     @Column(name="name")
     private String customerCategoryName;
+
+    @OneToMany(mappedBy = "customerCategory" ,fetch = FetchType.LAZY)
+    private List<Customer> customerList = new ArrayList<>();
 
 }

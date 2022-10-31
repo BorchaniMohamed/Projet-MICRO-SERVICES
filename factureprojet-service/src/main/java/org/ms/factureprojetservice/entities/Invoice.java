@@ -28,6 +28,7 @@ public class Invoice {
     @Transient
     private Customer customer;
     private Long customerId;
+
     @OneToMany(mappedBy = "invoice" ,fetch = FetchType.LAZY)
     private List<InvoiceLine> invoiceLines = new ArrayList<>();
 }

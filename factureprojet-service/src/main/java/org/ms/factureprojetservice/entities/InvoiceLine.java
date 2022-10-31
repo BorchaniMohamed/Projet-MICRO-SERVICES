@@ -1,7 +1,10 @@
 package org.ms.factureprojetservice.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.ms.factureprojetservice.model.stockItem.StockItem;
 
 import javax.persistence.*;
@@ -12,7 +15,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+
 public class InvoiceLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +31,4 @@ public class InvoiceLine {
 
     @Column(name="qte")
     private Integer quantity;
-
-
-
 }

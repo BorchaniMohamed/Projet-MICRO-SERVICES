@@ -32,12 +32,12 @@ public class ClientprojetServiceApplication {
 
 			for (CustomerCategory c : customerCategoryRepository.findAll())
 			{
-				System.out.println(c.toString());
+				System.out.println(c.getCustomerCategoryName());
 			}
 
 			for (Customer c : customerRepository.findAll())
 			{
-				System.out.println(c.toString());
+				System.out.println(c.getCustomerName());
 			}
 		};
 	}
