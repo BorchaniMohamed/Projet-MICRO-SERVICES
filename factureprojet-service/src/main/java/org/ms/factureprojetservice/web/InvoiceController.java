@@ -25,7 +25,17 @@ public class InvoiceController {
 
     @GetMapping("/invoices")
     private List<Invoice> findAll(){
-        return invoiceRepository.findAll();
+        List<Invoice> all = invoiceRepository.findAll();
+        all.forEach(invoice -> {
+            Customer client = clientServiceClient.findClientById(invoice.getCustomerId());
+            invoice.setCustomer(client);
+            invoice.getInvoiceLines().forEach(invoiceLine -> {
+                StockItem stockitem = produitServiceClient.findProductById(invoiceLine.getStockItemId());
+                invoiceLine.setStockItem(stockitem);
+            });
+        });
+
+        return all;
     }
     @GetMapping("/invoices/{id}")
     private Invoice findInvoiceById(@PathVariable Long id){
