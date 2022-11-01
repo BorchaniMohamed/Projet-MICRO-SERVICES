@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/authentification-service/authentification-service.iml" filepath="$PROJECT_DIR$/authentification-service/authentification-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/clientprojet-service/clientprojet-service.iml" filepath="$PROJECT_DIR$/clientprojet-service/clientprojet-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/eurekaprojet-service/eurekaprojet-service.iml" filepath="$PROJECT_DIR$/eurekaprojet-service/eurekaprojet-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/factureprojet-service/factureprojet-service.iml" filepath="$PROJECT_DIR$/factureprojet-service/factureprojet-service.iml" />

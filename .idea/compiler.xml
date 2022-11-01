@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eurekaprojet-service" />
+        <module name="authentification-service" />
         <module name="clientprojet-service" />
         <module name="gatewayprojet-service" />
         <module name="produitprojet-service" />
