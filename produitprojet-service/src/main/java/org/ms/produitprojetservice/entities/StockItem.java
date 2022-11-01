@@ -21,9 +21,13 @@ public class StockItem {
     private String stockItemName;
     private String brand;
     private String carateristique;
+
+    @Column(name="taxerate")
     private Double taxrate;
+
     @Column(name="prix")
-    private Double unitprice;
+    private Double price;
+
     @Column(name="qte")
     private Integer quantity;
     @Temporal(TemporalType.DATE)

@@ -20,7 +20,7 @@ public class StockItem {
     private String carateristique;
     private Double taxrate;
 
-    private Double unitPrice;
+    private Double price;
 
     private Long quantity;
 

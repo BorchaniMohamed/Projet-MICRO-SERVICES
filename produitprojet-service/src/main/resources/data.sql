@@ -1,6 +1,6 @@
-INSERT INTO Stock_Item (name,prix,qte) values ('hp',12,100);
-INSERT INTO Stock_Item (name,prix,qte) values ('lg',34,245);
-INSERT INTO Stock_Item (name,prix,qte) values ('lenovo',77,300);
+INSERT INTO Stock_Item (name,qte,taxerate,prix) values ('hp',3,0.18,100);
+INSERT INTO Stock_Item (name,qte,taxerate,prix) values ('lg',3,0.19,100);
+INSERT INTO Stock_Item (name,qte,taxerate,prix) values ('lenovo',3,0.13,100);
 
 
 

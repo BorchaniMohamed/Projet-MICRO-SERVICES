@@ -20,15 +20,24 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="invoice_date",columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+
     private Date invoiceDate;
     @Column(name="states")
+
     private String states;//TODO: ajouter states dans facture
+
     @Transient
     private Customer customer;
     private Long customerId;
 
-    @OneToMany(mappedBy = "invoice" ,fetch = FetchType.LAZY)
+    private Double amount;
+
+
+    @OneToMany(mappedBy = "invoice" ,fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     private List<InvoiceLine> invoiceLines = new ArrayList<>();
+
+
 }

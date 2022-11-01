@@ -4,13 +4,10 @@ import lombok.AllArgsConstructor;
 import org.ms.factureprojetservice.entities.Invoice;
 import org.ms.factureprojetservice.feign.ClientServiceClient;
 import org.ms.factureprojetservice.feign.ProduitServiceClient;
-import org.ms.factureprojetservice.model.customer.Customer;
-import org.ms.factureprojetservice.model.stockItem.StockItem;
 import org.ms.factureprojetservice.repository.InvoiceLineRepository;
-import org.ms.factureprojetservice.repository.InvoiceRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.ms.factureprojetservice.services.InvoiceService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,35 +16,46 @@ import java.util.List;
 public class InvoiceController {
 
     private InvoiceLineRepository invoiceLineRepository;
-    private InvoiceRepository invoiceRepository;
+    private InvoiceService invoiceService;
     private ClientServiceClient clientServiceClient;
     private ProduitServiceClient produitServiceClient;
 
+
     @GetMapping("/invoices")
     private List<Invoice> findAll(){
-        List<Invoice> all = invoiceRepository.findAll();
-        all.forEach(invoice -> {
-            Customer client = clientServiceClient.findClientById(invoice.getCustomerId());
-            invoice.setCustomer(client);
-            invoice.getInvoiceLines().forEach(invoiceLine -> {
-                StockItem stockitem = produitServiceClient.findProductById(invoiceLine.getStockItemId());
-                invoiceLine.setStockItem(stockitem);
-            });
-        });
-
+        List<Invoice> all = invoiceService.findAll();
         return all;
     }
     @GetMapping("/invoices/{id}")
     private Invoice findInvoiceById(@PathVariable Long id){
-        Invoice invoice = invoiceRepository.getById(id);
-        Customer client = clientServiceClient.findClientById(invoice.getCustomerId());
-        invoice.setCustomer(client);
-        invoice.getInvoiceLines().forEach(invoiceLine -> {
-            StockItem stockitem = produitServiceClient.findProductById(invoiceLine.getStockItemId());
-            invoiceLine.setStockItem(stockitem);
-        });
+        Invoice invoice = invoiceService.findById(id);
         return invoice;
 
+    }
+    @PostMapping("/invoices")
+    public Invoice save(@RequestBody Invoice invoice){
+        return invoiceService.save(invoice);
+
+    }
+    @GetMapping("/deleteInvoice/{id}" )
+    public ResponseEntity delete(@PathVariable Long id){
+        if(invoiceService.deleteById(id))
+            return ResponseEntity.ok().build();
+        return ResponseEntity.notFound().build();
+    }
+    @GetMapping("/editInvoice/{id}")
+    public ResponseEntity<Invoice> editPatient(@RequestBody Invoice invoice, @PathVariable Long id){
+        Invoice i= invoiceService.findById(id);
+        if (i == null){
+            return ResponseEntity.notFound().build();
+        }
+        else if (invoice.getId()==i.getId())
+        {
+            i= invoiceService.save(invoice);
+            return ResponseEntity.ok().body(i);
+        }
+        else
+            return ResponseEntity.badRequest().build();
     }
 
 
