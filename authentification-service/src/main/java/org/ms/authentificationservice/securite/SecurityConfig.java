@@ -2,6 +2,7 @@ package org.ms.authentificationservice.securite;
 
 import org.ms.authentificationservice.JwtAuthenticationFilter;
 import org.ms.authentificationservice.entities.AppUser;
+import org.ms.authentificationservice.filtres.JwtAuthorizationFilter;
 import org.ms.authentificationservice.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -57,8 +59,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         http.headers().frameOptions().disable();
         http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
        // http.formLogin();
+        //http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/**").hasAuthority("ADMIN");
+        //http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/**").hasAuthority("USER");
+        http.authorizeRequests().antMatchers("api/refreshToken/**").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(new JwtAuthenticationFilter(authenticationManagerBean()));
+        http.addFilterBefore(new JwtAuthorizationFilter(),
+                UsernamePasswordAuthenticationFilter.class);
     }
     @Bean
     @Override

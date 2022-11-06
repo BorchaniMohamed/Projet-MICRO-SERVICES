@@ -1,26 +1,32 @@
 package org.ms.payementprojetservice.entities.Invoce;
 
-import lombok.*;
-import org.ms.payementprojetservice.entities.stockItem.StockItem;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.ms.payementprojetservice.entities.StockItems.StockItem;
+
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="invoice_line")
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class InvoiceLine {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Invoice invoice;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private StockItem stockItem;
-    @Column(name="qte")
-    private Integer quantity;
 
+public class InvoiceLine {
+
+    private Long id;
+
+
+    private Invoice invoice;
+
+
+    private StockItem stockItem;
+    private Long stockItemId;
+
+
+    private Integer quantity;
 }

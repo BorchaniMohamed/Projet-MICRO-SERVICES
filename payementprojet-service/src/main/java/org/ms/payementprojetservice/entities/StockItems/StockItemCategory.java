@@ -1,4 +1,4 @@
-package org.ms.payementprojetservice.entities.stockItem;
+package org.ms.payementprojetservice.entities.StockItems;
 
 import lombok.*;
 

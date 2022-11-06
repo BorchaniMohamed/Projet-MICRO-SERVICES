@@ -22,8 +22,12 @@ public class Transaction {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="transaction_date",columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date transactionDate;
-    @OneToOne(fetch = FetchType.EAGER)
+
+    @Transient
     private Invoice invoice;
-    @ManyToOne(fetch = FetchType.EAGER)
+    private Long invoice_id;
+
+    @Transient
     private Customer customer;
+    private Long costumer_id;
 }

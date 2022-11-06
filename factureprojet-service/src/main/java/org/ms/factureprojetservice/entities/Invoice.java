@@ -23,11 +23,11 @@ public class Invoice {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="invoice_date",columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-
     private Date invoiceDate;
-    @Column(name="states")
 
-    private String states;//TODO: ajouter states dans facture
+
+    @Column(name="states")
+    private String states;
 
     @Transient
     private Customer customer;

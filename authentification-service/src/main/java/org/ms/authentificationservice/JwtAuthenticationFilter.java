@@ -2,6 +2,7 @@ package org.ms.authentificationservice;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter
 {
@@ -62,6 +65,25 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withClaim("roles", user.getAuthorities().stream().map(ga->ga.getAuthority()).collect(Collectors.toList()))
                 .sign(algo); //signer le JWT avec l'algorithme choisi
 //Envoyer le JWT dans l'entête de la réponse
-        response.setHeader("Authorization",jwtAccessToken);
+
+        String jwtRefreshToken = JWT.create()
+// stocker le nom de l'utilisateur
+                .withSubject(user.getUsername())
+// date d'expiration après 1 heure
+                .withExpiresAt(new Date(System.currentTimeMillis()+60*60*1000))
+//url de la reuête d'origine
+                .withIssuer(request.getRequestURL().toString())
+//signer le refresh JWT avec l'algorithme choisi
+                .sign(algo);
+//stocker les deux tokens dans un objet HashMap
+        Map<String,String> mapTokens = new HashMap<>();
+        mapTokens.put("access-token",jwtAccessToken);
+        mapTokens.put("refresh-token",jwtRefreshToken);
+//Spécifier le format du contenu de la réponse
+        response.setContentType("application/json");
+//place l'objet HashMap dans le corps de la réponse
+        new ObjectMapper().writeValue(response.getOutputStream(),mapTokens);
+
+        //response.setHeader("Authorization",jwtAccessToken);
     }
 }
