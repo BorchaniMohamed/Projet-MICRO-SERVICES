@@ -35,10 +35,10 @@ public class ClientprojetServiceApplication {
 				System.out.println(c.getCustomerCategoryName());
 			}
 
-			for (Customer c : customerRepository.findAll())
-			{
-				System.out.println(c.getCustomerName());
-			}
+//			for (Customer c : customerRepository.findAll())
+//			{
+//				System.out.println(c.getCustomerName()+" adresse :"+c.getAdresse().toString());
+//			}
 		};
 	}
 

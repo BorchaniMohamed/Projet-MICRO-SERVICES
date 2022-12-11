@@ -20,15 +20,11 @@ import java.util.List;
 public class Invoice {
 
     private Long id;
-
-
     private Date invoiceDate;
-
-
     private String states;
     private Customer customer;
     private Long customerId;
-
+    private Double restetopayed;
     private Double amount;
 
 

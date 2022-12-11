@@ -1,7 +1,6 @@
 package org.ms.clientprojetservice.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,8 +19,6 @@ public class Customer {
     private Long id;
     @Column(name="name")
     private String customerName;
-    @Column(name="delivreyadress")
-    private String deliveryAddress;
     @Column(name="dateopen")
     @Temporal(TemporalType.DATE)
     private Date accountOpenedDate;
@@ -30,12 +27,14 @@ public class Customer {
     private Date dateOfBirith;
     @Column(name="phone")
     private String phoneNumber;
-    private String city;
     @Column(name="mail")
     private String customerEmail;
-
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private CustomerCategory customerCategory;
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+    private Adresse adresse;
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+    private ToDoCustomer todocustomer;
+
 
 }

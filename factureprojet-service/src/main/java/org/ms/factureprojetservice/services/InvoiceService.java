@@ -17,4 +17,5 @@ public interface InvoiceService {
     Invoice addCustomerAndStockItem(Invoice invoice);
 
     Double computeAmount (Invoice invoice);
+    Double computeAmountTransaction (Invoice invoice);
 }

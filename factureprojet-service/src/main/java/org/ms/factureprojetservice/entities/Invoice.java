@@ -35,8 +35,11 @@ public class Invoice {
 
     private Double amount;
 
+    private  Double restetopayed;
 
-    @OneToMany(mappedBy = "invoice" ,fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+
+
+    @OneToMany(mappedBy = "invoice" ,fetch = FetchType.EAGER, cascade= CascadeType.ALL)
     private List<InvoiceLine> invoiceLines = new ArrayList<>();
 
 

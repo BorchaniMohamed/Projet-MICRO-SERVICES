@@ -1,5 +1,6 @@
 package org.ms.payementprojetservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.ms.payementprojetservice.entities.Invoce.Invoice;
 import org.ms.payementprojetservice.entities.customer.Customer;
@@ -13,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +25,14 @@ public class Transaction {
     @Column(name="transaction_date",columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date transactionDate;
 
+    @Column(name="amounttransaction")
+    private Double amounttransaction;
+
     @Transient
     private Invoice invoice;
     private Long invoice_id;
 
-    @Transient
-    private Customer customer;
-    private Long costumer_id;
+//    @Transient
+//    private Customer customer;
+//    private Long costumer_id;
 }

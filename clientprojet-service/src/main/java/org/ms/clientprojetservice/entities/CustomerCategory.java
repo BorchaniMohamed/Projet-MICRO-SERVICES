@@ -1,10 +1,9 @@
 package org.ms.clientprojetservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -13,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Table(name="customercategory")
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class CustomerCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,11 @@ public class CustomerCategory {
     @Column(name="name")
     private String customerCategoryName;
 
-    @OneToMany(mappedBy = "customerCategory" ,fetch = FetchType.LAZY)
-    private List<Customer> customerList = new ArrayList<>();
+
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @OneToMany(mappedBy = "customerCategory",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+//    private List<Customer> customers;
+
+
 
 }
