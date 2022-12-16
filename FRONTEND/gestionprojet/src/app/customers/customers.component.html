@@ -44,7 +44,8 @@
                   <td class="center">{{p.accountOpenedDate}}</td>
                   <td class="center">{{getCategorie(p)}}</td>
                   <td>
-                    <input type="button" value="supprimer" class="btn btn-danger" (click)="DeleteClient(p.id)">
+                    <button class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true" (click)="DeleteClient(p.id)"></span></button>
+                    <button class="btn btn-success"><span class="glyphicon glyphicon-pencil" aria-hidden="true" [routerLink]="['/editclient/',p.id]"></span></button>
                   </td>
                   <!--                    <button (click)="HandelDeleteClient(p)" class="btn btn-danger">supp</button>-->
                 </tr>
@@ -90,7 +91,7 @@
         <!--   Basic Table  -->
         <div class="panel panel-default">
           <div class="panel-heading">
-            Adresse de livraison
+            Nouveaux Adresse de livraison
           </div>
           <div class="panel-body">
             <div class="table-responsive">
@@ -105,7 +106,7 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let d of adresses">
-                  <td>{{d.gouvernorat}}</td>
+                  <td>{{d.id}}#{{d.gouvernorat}}</td>
                   <td>{{d.delegation}}</td>
                   <td>{{d.localite}}</td>
                   <td>{{d.codepostale}}</td>
@@ -153,7 +154,7 @@
         <!--    Bordered Table  -->
         <div class="panel panel-default">
           <div class="panel-heading">
-            Actions To Do
+            Nouveaux Actions To Do
           </div>
           <!-- /.panel-heading -->
           <div class="panel-body">

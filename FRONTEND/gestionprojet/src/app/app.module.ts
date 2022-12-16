@@ -13,6 +13,8 @@ import {HomepageComponent} from './base/homepage/homepage.component';
 import {StatistiqueComponent} from './statistique/statistique.component';
 import {HttpClientModule} from "@angular/common/http";
 import {AjoutClientComponent} from './customers/ajout-client/ajout-client.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {EditClientComponent} from './customers/edit-client/edit-client.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +28,14 @@ import {AjoutClientComponent} from './customers/ajout-client/ajout-client.compon
     HomepageComponent,
     StatistiqueComponent,
     AjoutClientComponent,
+    EditClientComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
-
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

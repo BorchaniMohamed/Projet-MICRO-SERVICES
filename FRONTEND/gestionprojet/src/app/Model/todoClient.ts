@@ -1,5 +1,5 @@
-export interface todoClient{
-  id : number;
-  actionToDo : string;
-  dateOfAction : Date;
+export class todoClient{
+  id !: any;
+  actionToDo !: string;
+  dateOfAction !: Date;
 }

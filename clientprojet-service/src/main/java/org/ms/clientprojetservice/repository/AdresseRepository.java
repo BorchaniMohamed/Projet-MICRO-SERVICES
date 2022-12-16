@@ -6,4 +6,5 @@ import org.springframework.data.rest.webmvc.RepositoryRestController;
 
 @RepositoryRestController
 public interface AdresseRepository extends JpaRepository<Adresse,Long> {
+
 }

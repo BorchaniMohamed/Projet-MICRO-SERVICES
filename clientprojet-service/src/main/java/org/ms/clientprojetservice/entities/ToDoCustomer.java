@@ -1,5 +1,6 @@
 package org.ms.clientprojetservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Table(name="todocustomer")
 public class ToDoCustomer {
     @Id

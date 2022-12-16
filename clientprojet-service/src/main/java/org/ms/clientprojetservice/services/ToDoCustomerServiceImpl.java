@@ -6,6 +6,7 @@ import org.ms.clientprojetservice.repository.ToDoCustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 @Service
 @AllArgsConstructor
@@ -29,5 +30,11 @@ public class ToDoCustomerServiceImpl implements ToDoCustomerService{
     @Override
     public List<ToDoCustomer> findAll() {
         return toDoCustomerRepository.findAll();
+    }
+
+    @Override
+    public List<ToDoCustomer> findNewToDoCustomers() {
+        Date date = new  Date();
+        return toDoCustomerRepository.findToDoCustomersByDateOfAction(date);
     }
 }

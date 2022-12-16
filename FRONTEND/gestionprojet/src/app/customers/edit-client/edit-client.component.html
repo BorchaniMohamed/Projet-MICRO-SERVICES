@@ -1,0 +1,92 @@
+<div id="page-wrapper" >
+  <div class="header">
+    <h1 class="page-header">
+      Formulaire Client <small>Ajout Client.</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a>Home</a></li>
+      <li><a>Client</a></li>
+      <li class="active">Ajout</li>
+    </ol>
+
+  </div>
+
+  <div id="page-inner">
+    <div class="row">
+      <div class="col-xs-12">
+        <form (ngSubmit)="modifierClient()">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="card-title">
+                <div class="title">Editer Client</div>
+              </div>
+            </div>
+            <div class="center">
+              <button type="submit" class="btn btn-success mr-10">Modifier</button>
+              <button type="reset" class="btn btn-danger mr-10">Annuler</button>
+
+            </div>
+            <div class="panel-body">
+              <div class="sub-title">ID_Client</div>
+              <div>
+                <input type="number" class="form-control" name="customer ID" [(ngModel)]="client.id" readonly>
+              </div>
+              <div class="sub-title">Nom</div>
+              <div>
+                <input type="text" class="form-control" placeholder="Text input" name="customerName" [(ngModel)]="client.customerName" >
+              </div>
+              <div class="sub-title">Date Naissance</div>
+              <div>
+                <input type="Date" class="form-control" placeholder="Text input" name="dateOfBirith" [(ngModel)]="client.dateOfBirith">
+              </div>
+              <div class="sub-title">Téléphonne</div>
+              <div>
+                <input type="number" class="form-control" placeholder="Number input" name="phoneNumber" [(ngModel)]="client.phoneNumber">
+              </div>
+              <div class="sub-title">Email</div>
+              <div>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="jane.doe@example.com" name="customerEmail" [(ngModel)]="client.customerEmail">
+              </div>
+              <div class="sub-title">Sélectionner Gatégorie</div>
+              <div class="radio3 radio-check radio-inline">
+                <input  id="radio4" name="radio2" value="2" type="radio" [(ngModel)]="idcategorie">
+                <label for="radio4">
+                  Particulier
+                </label>
+              </div>
+              <div class="radio3 radio-check radio-success radio-inline">
+                <input type="radio" id="radio5" name="radio2" value="1" [(ngModel)]="idcategorie">
+                <label for="radio5">
+                  Entreprise
+                </label>
+              </div>
+              <div class="sub-title">Adresse</div>
+              <div>
+                <input type="text" class="form-control mr-20" placeholder="Gouvernerat" name="gouvernorat" [(ngModel)]="client.adresse.gouvernorat">
+              </div>
+              <div>
+                <input type="text" class="form-control mr-20" placeholder="Delegation" name="delegation" [(ngModel)]="client.adresse.delegation">
+              </div>
+              <div>
+                <input type="text" class="form-control mr-20" placeholder="Déscriptioon Adresse" name="localite" [(ngModel)]="client.adresse.localite">
+              </div>
+              <div>
+                <input type="number" class="form-control mr-20" placeholder="Code Postal" name="codepostale" [(ngModel)]="client.adresse.codepostale">
+              </div>
+              <div class="sub-title">Action Todo</div>
+              <div>
+                <input type="text" class="form-control mr-20" placeholder="To do Client" name="actionToDo" [(ngModel)]="client.todocustomer.actionToDo">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- /. PAGE INNER  -->
+</div>
+<!-- /. PAGE WRAPPER  -->
+

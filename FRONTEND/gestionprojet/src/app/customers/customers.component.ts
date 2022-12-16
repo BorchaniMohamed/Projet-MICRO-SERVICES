@@ -42,7 +42,10 @@ export class CustomersComponent implements  OnInit{
   private loadClient() {
     this.clientService.getAllClients().subscribe(data=>this.customers=data),
       (err:any)=>console.log(err);
-    this.clientService.getAllClientsCategories().subscribe(data=>this.categories=data),
+    this.clientService.getAllClientsCategories().subscribe(data=> {
+      this.categories = data;
+      console.log(data)
+    }),
       (err:any)=>console.log(err);
     this.clientService.getAllClientsAdresses().subscribe(data=>this.adresses=data),
       (err:any)=>console.log(err);

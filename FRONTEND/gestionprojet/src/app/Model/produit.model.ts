@@ -1,13 +1,13 @@
-export interface Produit{
+export class Produit{
 
-  id : number;
-  stockItemName: string;
-  brand : string;
-  carateristique : string;
-  taxrate : number;
-  price : number;
-  quantity : number;
-  validTo : Date;
-  ValidForm : Date;
-  photoPath : string;
+  id !: any;
+  stockItemName !: string;
+  brand !: string;
+  carateristique !: string;
+  taxrate !: number;
+  price !: number;
+  quantity !: number;
+  validTo !: Date;
+  ValidForm !: Date;
+  photoPath !: string;
 }

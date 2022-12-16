@@ -2,10 +2,14 @@ package org.ms.clientprojetservice.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.ms.clientprojetservice.entities.Adresse;
 import org.ms.clientprojetservice.entities.Customer;
 import org.ms.clientprojetservice.entities.CustomerCategory;
+import org.ms.clientprojetservice.entities.ToDoCustomer;
+import org.ms.clientprojetservice.repository.AdresseRepository;
 import org.ms.clientprojetservice.repository.CustomerCategoryRepository;
 import org.ms.clientprojetservice.repository.CustomerRepository;
+import org.ms.clientprojetservice.repository.ToDoCustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -16,6 +20,8 @@ import java.util.List;
 @Slf4j
 public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
+    private ToDoCustomerRepository toDoCustomerRepository;
+    private AdresseRepository adresseRepository;
     private CustomerCategoryRepository customerCategoryRepository;
 
     @Override
@@ -27,13 +33,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer save(Customer customer) {
-        if(customer.getAccountOpenedDate()==null) {customer.setAccountOpenedDate(new Date());}
-        if(customer.getCustomerCategory()==null) customer.setCustomerCategory(null);
-        else
-        {
-            CustomerCategory customerCategory=customerCategoryRepository.getById(customer.getCustomerCategory().getId());
-            customer.setCustomerCategory(customerCategory);
-        }
+        adresseRepository.save(customer.getAdresse());
+        toDoCustomerRepository.save(customer.getTodocustomer());
+        CustomerCategory customerCategory=customerCategoryRepository.getById(customer.getCustomerCategory().getId());
+        customer.setCustomerCategory(customerCategory);
         return customerRepository.save(customer);
     }
 
@@ -49,6 +52,18 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer update(Customer customer) {
+        Adresse adresse = adresseRepository.getById(customer.getAdresse().getId());
+        adresse.setLocalite(customer.getAdresse().getLocalite());
+        adresse.setGouvernorat(customer.getAdresse().getGouvernorat());
+        adresse.setCodepostale(customer.getAdresse().getCodepostale());
+        adresse.setDelegation(customer.getAdresse().getDelegation());
+
+        ToDoCustomer toDoCustomer=toDoCustomerRepository.getById(customer.getTodocustomer().getId());
+        toDoCustomer.setActionToDo(customer.getTodocustomer().getActionToDo());
+        toDoCustomer.setDateOfAction(customer.getTodocustomer().getDateOfAction());
+
+        CustomerCategory customerCategory=customerCategoryRepository.getById(customer.getCustomerCategory().getId());
+        customer.setCustomerCategory(customerCategory);
         return customerRepository.save(customer);
     }
 

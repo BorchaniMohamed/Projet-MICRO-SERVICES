@@ -1,7 +1,7 @@
 <div id="page-wrapper" >
   <div class="header">
     <h1 class="page-header">
-      Form Elements <small>Best form elements.</small>
+      Formulaire Client <small>Ajout Client.</small>
     </h1>
     <ol class="breadcrumb">
       <li><a>Home</a></li>
@@ -14,7 +14,7 @@
   <div id="page-inner">
     <div class="row">
       <div class="col-xs-12">
-        <form>
+        <form (ngSubmit)="ajoutClient()">
         <div class="panel panel-default">
           <div class="panel-heading">
             <div class="card-title">
@@ -29,45 +29,49 @@
           <div class="panel-body">
             <div class="sub-title">Nom</div>
             <div>
-              <input type="text" class="form-control" placeholder="Text input">
+              <input type="text" class="form-control" placeholder="Text input" name="customerName" [(ngModel)]="newclient.customerName" >
             </div>
             <div class="sub-title">Date Naissance</div>
             <div>
-              <input type="Date" class="form-control" placeholder="Text input">
+              <input type="Date" class="form-control" placeholder="Text input" name="dateOfBirith" [(ngModel)]="newclient.dateOfBirith">
             </div>
             <div class="sub-title">Téléphonne</div>
             <div>
-              <input type="number" class="form-control" placeholder="Number input">
+              <input type="number" class="form-control" placeholder="Number input" name="phoneNumber" [(ngModel)]="newclient.phoneNumber">
             </div>
             <div class="sub-title">Email</div>
             <div>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="jane.doe@example.com">
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="jane.doe@example.com" name="customerEmail" [(ngModel)]="newclient.customerEmail">
             </div>
             <div class="sub-title">Sélectionner Gatégorie</div>
                 <div class="radio3 radio-check radio-inline">
-                  <input type="radio" id="radio4" name="radio2" value="option1" checked="">
+                  <input  id="radio4" name="radio2" value="2" type="radio" [(ngModel)]="idcategorie">
                   <label for="radio4">
                     Particulier
                   </label>
                 </div>
                 <div class="radio3 radio-check radio-success radio-inline">
-                  <input type="radio" id="radio5" name="radio2" value="option2">
+                  <input type="radio" id="radio5" name="radio2" value="1" [(ngModel)]="idcategorie">
                   <label for="radio5">
                     Entreprise
                   </label>
                 </div>
             <div class="sub-title">Adresse</div>
             <div>
-              <input type="text" class="form-control mr-20" placeholder="Gouvernerat">
+              <input type="text" class="form-control mr-20" placeholder="Pays" name="gouvernorat" [(ngModel)]="adresseclient.gouvernorat">
             </div>
             <div>
-              <input type="text" class="form-control mr-20" placeholder="Delegation">
+              <input type="text" class="form-control mr-20" placeholder="Ville" name="delegation" [(ngModel)]="adresseclient.delegation">
             </div>
             <div>
-              <input type="text" class="form-control mr-20" placeholder="Déscriptioon Adresse">
+              <input type="text" class="form-control mr-20" placeholder="Adresse" name="localite" [(ngModel)]="adresseclient.localite">
             </div>
             <div>
-              <input type="text" class="form-control mr-20" placeholder="Code Postal">
+              <input type="number" class="form-control mr-20" placeholder="Code Postal" name="codepostale" [(ngModel)]="adresseclient.codepostale">
+            </div>
+            <div class="sub-title">Action Todo</div>
+            <div>
+              <input type="text" class="form-control mr-20" placeholder="To do Client" name="actionToDo" [(ngModel)]="todoclient.actionToDo">
             </div>
           </div>
         </div>

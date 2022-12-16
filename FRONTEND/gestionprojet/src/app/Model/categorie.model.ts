@@ -1,4 +1,4 @@
-export interface Categorie{
-  id : number;
-  customerCategoryName :string;
+export class Categorie{
+  id !: number;
+  customerCategoryName !:string;
 }

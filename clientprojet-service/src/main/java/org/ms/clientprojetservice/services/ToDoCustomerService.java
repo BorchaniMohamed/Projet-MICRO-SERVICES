@@ -10,4 +10,6 @@ public interface ToDoCustomerService {
     ToDoCustomer save(ToDoCustomer toDoCustomer);
     ToDoCustomer findById(long id);
     List<ToDoCustomer> findAll();
+
+    List<ToDoCustomer> findNewToDoCustomers();
 }

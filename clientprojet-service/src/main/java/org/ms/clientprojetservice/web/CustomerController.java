@@ -35,6 +35,17 @@ public class CustomerController {
         List<Customer> all = customerService.findNewCustomer();
         return all;
     }
+    @GetMapping("/newcadresses")
+    private List<Adresse> findNewAdresse(){
+        List<Adresse> all = adresseService.findNewAdresse();
+        return all;
+    }
+
+    @GetMapping("/newcactionstodo")
+    private List<ToDoCustomer> findNewToDoCustomers(){
+        List<ToDoCustomer> all = toDoCustomerService.findNewToDoCustomers();
+        return all;
+    }
 
     @GetMapping("/customerCategories")
     private List<CustomerCategory> findAllCategory(){
@@ -86,7 +97,7 @@ public class CustomerController {
 
     }
 
-    @PostMapping("/customerCategories")
+    @PostMapping(value = "/customerCategories")
     public CustomerCategory saveCategory(@RequestBody CustomerCategory c){
         return categoryService.save(c);
 

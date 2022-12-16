@@ -9,6 +9,7 @@ import {SlidebarComponent} from "./base/slidebar/slidebar.component";
 import {HomepageComponent} from "./base/homepage/homepage.component";
 import {StatistiqueComponent} from "./statistique/statistique.component";
 import {AjoutClientComponent} from "./customers/ajout-client/ajout-client.component";
+import {EditClientComponent} from "./customers/edit-client/edit-client.component";
 
 const routes: Routes = [
   {path:"products",component:ProductsComponent},
@@ -20,7 +21,9 @@ const routes: Routes = [
   {path:"homepage",component:HomepageComponent},
   {path:"",component:StatistiqueComponent},
   {path:"statistique",component:StatistiqueComponent},
-  {path:"ajoutclient",component:AjoutClientComponent}
+  {path:"ajoutclient",component:AjoutClientComponent},
+  {path:"editclient/:_id",component:EditClientComponent}
+
 
 ];
 
