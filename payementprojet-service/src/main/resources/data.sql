@@ -1,4 +1,4 @@
-INSERT INTO Transaction (methode,amounttransaction,invoice_id) values ('cach',200,1);
+INSERT INTO Transaction (methode,amounttransaction) values ('cach',200);
 
 
 

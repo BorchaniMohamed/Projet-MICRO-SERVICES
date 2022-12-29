@@ -69,7 +69,6 @@ public class CustomerController {
     private Customer findCustomerById(@PathVariable Long id){
         Customer customer = customerService.findById(id);
         return customer;
-
     }
     @GetMapping("/customerCategories/{id}")
     private CustomerCategory findCategoryById(@PathVariable Long id){

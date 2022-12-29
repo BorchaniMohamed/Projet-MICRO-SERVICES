@@ -1,0 +1,72 @@
+<p>ajout-transaction works!</p><div id="page-wrapper" >
+  <div class="header">
+    <h1 class="page-header">
+      Formulaire Transaction<small>tableaux réactifs</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li>Home</li>
+      <li>Transaction</li>
+      <li class="active">Formulaire</li>
+    </ol>
+
+  </div>
+
+  <div id="page-inner">
+
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Advanced Tables -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Liste Factures Non Payées
+          </div>
+          <div class="panel-heading">
+          <div class="sub-title">   Méthode de payement</div>
+            <div>
+              <input type="text" class="form-control" placeholder="Text input" name="customerName" [(ngModel)]="methodepayement" >
+            </div>
+            <span class="badge bg-primary, text-danger">{{message}}</span>
+            </div>
+
+          <div class="panel-body">
+            <br>
+
+            <div class="table-responsive">
+
+
+              <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Date Création</th>
+                  <th>Etat</th>
+                  <th>Id client</th>
+                  <th>Montant</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let f of facturesnonpaye" class="odd gradeX">
+                  <ng-container *ngIf="f.states=='Non payé'">
+                  <td>{{f.id}}</td>
+                  <td>{{f.invoiceDate | date:'shortDate'}}</td>
+                  <td>{{f.states}}</td>
+                  <td class="center">{{f.customerId}}# {{f.customer.customerName}}</td>
+                  <td class="center">{{f.amount}}</td>
+                  <td>
+                    <button class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" (click)="PayeFacture(f)"> Payé</span></button>
+<!--                    <button class="btn btn-success"><span class="glyphicon glyphicon-pencil" aria-hidden="true" [routerLink]="['/edit-facture/',f.id]"></span></button>-->
+                  </td>
+                  </ng-container>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+        <!--End Advanced Tables -->
+      </div>
+    </div>
+    <!-- /. ROW  -->
+  </div>
+</div>

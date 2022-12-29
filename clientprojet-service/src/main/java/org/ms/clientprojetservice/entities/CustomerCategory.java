@@ -19,12 +19,4 @@ public class CustomerCategory {
     private Long id;
     @Column(name="name")
     private String customerCategoryName;
-
-
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-//    @OneToMany(mappedBy = "customerCategory",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
-//    private List<Customer> customers;
-
-
-
 }

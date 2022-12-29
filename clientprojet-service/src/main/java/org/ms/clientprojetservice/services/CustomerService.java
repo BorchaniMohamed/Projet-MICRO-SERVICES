@@ -11,7 +11,6 @@ public interface CustomerService {
     Customer save(Customer customer);
     Customer findById(long id);
     List<Customer> findAll();
-
     Customer update(Customer customer);
     List<Customer> findNewCustomer();
 }

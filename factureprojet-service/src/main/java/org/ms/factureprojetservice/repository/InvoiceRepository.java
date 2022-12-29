@@ -7,4 +7,5 @@ import org.springframework.data.rest.webmvc.RepositoryRestController;
 //@RepositoryRestController
 @RepositoryRestController
 public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
+
 }

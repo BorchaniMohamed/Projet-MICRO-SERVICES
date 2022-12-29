@@ -15,6 +15,12 @@ import {HttpClientModule} from "@angular/common/http";
 import {AjoutClientComponent} from './customers/ajout-client/ajout-client.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {EditClientComponent} from './customers/edit-client/edit-client.component';
+import {AjoutProduitComponent} from './products/ajout-produit/ajout-produit.component';
+import {EditProduitComponent} from './products/edit-produit/edit-produit.component';
+import {AjoutFactureComponent} from "./factures/ajout-facture/ajout-facture.component";
+import {EditFactureComponent} from "./factures/edit-facture/edit-facture.component";
+import {AjoutTransactionComponent} from './transactions/ajout-transaction/ajout-transaction.component';
+import {EditTransactionComponent} from './transactions/edit-transaction/edit-transaction.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +35,12 @@ import {EditClientComponent} from './customers/edit-client/edit-client.component
     StatistiqueComponent,
     AjoutClientComponent,
     EditClientComponent,
+    AjoutProduitComponent,
+    EditProduitComponent,
+    AjoutFactureComponent,
+    EditFactureComponent,
+    AjoutTransactionComponent,
+    EditTransactionComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,12 @@ import {HomepageComponent} from "./base/homepage/homepage.component";
 import {StatistiqueComponent} from "./statistique/statistique.component";
 import {AjoutClientComponent} from "./customers/ajout-client/ajout-client.component";
 import {EditClientComponent} from "./customers/edit-client/edit-client.component";
+import {AjoutProduitComponent} from "./products/ajout-produit/ajout-produit.component";
+import {EditProduitComponent} from "./products/edit-produit/edit-produit.component";
+import {AjoutFactureComponent} from "./factures/ajout-facture/ajout-facture.component";
+import {EditFactureComponent} from "./factures/edit-facture/edit-facture.component";
+import {AjoutTransactionComponent} from "./transactions/ajout-transaction/ajout-transaction.component";
+import {EditTransactionComponent} from "./transactions/edit-transaction/edit-transaction.component";
 
 const routes: Routes = [
   {path:"products",component:ProductsComponent},
@@ -22,7 +28,13 @@ const routes: Routes = [
   {path:"",component:StatistiqueComponent},
   {path:"statistique",component:StatistiqueComponent},
   {path:"ajoutclient",component:AjoutClientComponent},
-  {path:"editclient/:_id",component:EditClientComponent}
+  {path:"editclient/:_id",component:EditClientComponent},
+  {path:"ajoutproduit",component:AjoutProduitComponent},
+  {path:"editproduit/:_id",component:EditProduitComponent},
+  {path:"ajoutfacture",component:AjoutFactureComponent},
+  {path:"edit-facture/:_id",component:EditFactureComponent},
+  {path:"ajouttransaction",component:AjoutTransactionComponent},
+  {path:"edit-transaction/:_id",component:EditTransactionComponent}
 
 
 ];

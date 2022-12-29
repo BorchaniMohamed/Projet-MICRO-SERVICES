@@ -1,4 +1,5 @@
 import {Client} from "./client.model";
+import {LigneFacture} from "./ligneFacture.model";
 
 export class Facture{
   id!:any;
@@ -7,6 +8,7 @@ export class Facture{
   customer !: Client;
   customerId!: number;
   amount!:number;
-  restetopayed!:number;
+  invoiceLines !: Array<LigneFacture>;
+
 
 }

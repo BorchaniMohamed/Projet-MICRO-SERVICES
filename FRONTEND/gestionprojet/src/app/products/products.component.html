@@ -1,11 +1,11 @@
 <div id="page-wrapper" >
   <div class="header">
     <h1 class="page-header">
-      Page Produis  <small>Tableaux réactifs</small>
+      Page Produits  <small>Tableaux réactifs</small>
     </h1>
     <ol class="breadcrumb">
       <li><a routerLink="/statistique">Home</a></li>
-      <li><a>Produis</a></li>
+      <li><a>Produits</a></li>
       <li class="active">Données</li>
     </ol>
 
@@ -25,22 +25,27 @@
               <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                 <tr>
+                  <th>#</th>
                   <th>Nom</th>
-                  <th>Mail</th>
-                  <th>Téléphone</th>
-                  <th>Date naissance</th>
-                  <th>Adresse livraison</th>
-                  <th>Date ouverture</th>
+                  <th>Marque</th>
+                  <th>Description</th>
+                  <th>Prix</th>
+                  <th>Qte</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let p of produits" class="odd gradeX">
                   <td>{{p.id}}</td>
+                  <td class="center">{{p.stockItemName}}</td>
                   <td>{{p.brand}}</td>
                   <td>{{p.carateristique}}</td>
                   <td class="center">{{p.price}}</td>
                   <td class="center">{{p.quantity}}</td>
-                  <td class="center">{{p.stockItemName}}</td>
+                  <td>
+                    <button class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true" (click)="DeleteProduit(p.id)"></span></button>
+                    <button class="btn btn-success"><span class="glyphicon glyphicon-pencil" aria-hidden="true" [routerLink]="['/editproduit/',p.id]"></span></button>
+                  </td>
+
                   <!--                    <button (click)="HandelDeleteClient(p)" class="btn btn-danger">supp</button>-->
                 </tr>
                 </tbody>
@@ -70,9 +75,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Mark</td>
+                <tr *ngFor="let c of categorieProduit">
+                  <td>{{c.id}}</td>
+                  <td>{{c.stockItemCategoryName}}</td>
                 </tr>
                 </tbody>
               </table>
@@ -85,7 +90,7 @@
         <!--   Basic Table  -->
         <div class="panel panel-default">
           <div class="panel-heading">
-            Adresse de livraison
+            Validité Produit
           </div>
           <div class="panel-body">
             <div class="table-responsive">
@@ -93,19 +98,17 @@
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>Pays</th>
-                  <th>Ville</th>
-                  <th>Adresse</th>
-                  <th>Code postale</th>
+                  <th>Produit</th>
+                  <th>Valide From</th>
+                  <th>Valide To</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Tunisie</td>
-                  <td>Sfax</td>
-                  <td>Route ain km 7.5</td>
-                  <td>3042</td>
+                <tr *ngFor="let p of produits">
+                  <td>{{p.id}}</td>
+                  <td>{{p.stockItemName}}</td>
+                  <td>{{p.validForm}}</td>
+                  <td>{{p.validTo}}</td>
                 </tr>
                 </tbody>
               </table>
@@ -121,7 +124,7 @@
         <!--    Striped Rows Table  -->
         <div class="panel panel-default">
           <div class="panel-heading">
-            Nouveaux Clients
+            Produits - Catégories
           </div>
           <div class="panel-body">
             <div class="table-responsive">
@@ -129,29 +132,17 @@
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
+                  <th>Prdouit</th>
+                  <th>Id</th>
+                  <th>Categorie</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
+                <tr *ngFor="let p of produits">
+                  <td>{{p.id}}</td>
+                  <td>{{p.stockItemName}}</td>
+                  <td>{{p.categorie.id}}</td>
+                  <td>{{p.categorie.stockItemCategoryName}}</td>
                 </tr>
                 </tbody>
               </table>
@@ -164,7 +155,7 @@
         <!--    Bordered Table  -->
         <div class="panel panel-default">
           <div class="panel-heading">
-            Codes Postaux
+            Produits - Fournisseur
           </div>
           <!-- /.panel-heading -->
           <div class="panel-body">
@@ -173,29 +164,19 @@
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
+                  <th>Nom</th>
+                  <th>Fournisseur</th>
+                  <th>Tel Frs</th>
+                  <th>Email</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
+                <tr *ngFor="let p of produits">
+                  <td>{{p.id}}</td>
+                  <td>{{p.stockItemName}}</td>
+                  <td>{{p.fournisseur.nomfournissuer}}</td>
+                  <td>{{p.fournisseur.telephone}}</td>
+                  <td>{{p.fournisseur.email}}</td>
                 </tr>
                 </tbody>
               </table>
@@ -205,106 +186,68 @@
         <!--  End  Bordered Table  -->
       </div>
     </div>
-    <!-- /. ROW  -->
-    <!--    <div class="row">-->
-    <!--      <div class="col-md-6">-->
-    <!--        &lt;!&ndash;    Hover Rows  &ndash;&gt;-->
-    <!--        <div class="panel panel-default">-->
-    <!--          <div class="panel-heading">-->
-    <!--            Hover Rows-->
-    <!--          </div>-->
-    <!--          <div class="panel-body">-->
-    <!--            <div class="table-responsive">-->
-    <!--              <table class="table table-hover">-->
-    <!--                <thead>-->
-    <!--                <tr>-->
-    <!--                  <th>#</th>-->
-    <!--                  <th>First Name</th>-->
-    <!--                  <th>Last Name</th>-->
-    <!--                  <th>Username</th>-->
-    <!--                </tr>-->
-    <!--                </thead>-->
-    <!--                <tbody>-->
-    <!--                <tr>-->
-    <!--                  <td>1</td>-->
-    <!--                  <td>Mark</td>-->
-    <!--                  <td>Otto</td>-->
-    <!--                  <td>@mdo</td>-->
-    <!--                </tr>-->
-    <!--                <tr>-->
-    <!--                  <td>2</td>-->
-    <!--                  <td>Jacob</td>-->
-    <!--                  <td>Thornton</td>-->
-    <!--                  <td>@fat</td>-->
-    <!--                </tr>-->
-    <!--                <tr>-->
-    <!--                  <td>3</td>-->
-    <!--                  <td>Larry</td>-->
-    <!--                  <td>the Bird</td>-->
-    <!--                  <td>@twitter</td>-->
-    <!--                </tr>-->
-    <!--                </tbody>-->
-    <!--              </table>-->
-    <!--            </div>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--        &lt;!&ndash; End  Hover Rows  &ndash;&gt;-->
-    <!--      </div>-->
-    <!--      <div class="col-md-6">-->
-    <!--        &lt;!&ndash;    Context Classes  &ndash;&gt;-->
-    <!--        <div class="panel panel-default">-->
 
-    <!--          <div class="panel-heading">-->
-    <!--            Context Classes-->
-    <!--          </div>-->
+        <div class="row">
+          <div class="col-md-6">
+            <!--    Hover Rows  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                New Produits
+              </div>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Produit</th>
+                      <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let p of newproduits" class="danger">
+                      <td>{{p.id}}</td>
+                      <td>{{p.stockItemName}}</td>
+                      <td>{{p.accountOpenedDate}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- End  Hover Rows  -->
+          </div>
+          <div class="col-md-6">
+            <!--    Context Classes  -->
+            <div class="panel panel-default">
 
-    <!--          <div class="panel-body">-->
-    <!--            <div class="table-responsive">-->
-    <!--              <table class="table">-->
-    <!--                <thead>-->
-    <!--                <tr>-->
-    <!--                  <th>#</th>-->
-    <!--                  <th>First Name</th>-->
-    <!--                  <th>Last Name</th>-->
-    <!--                  <th>Username</th>-->
-    <!--                </tr>-->
-    <!--                </thead>-->
-    <!--                <tbody>-->
-    <!--                <tr class="success">-->
-    <!--                  <td>1</td>-->
-    <!--                  <td>Mark</td>-->
-    <!--                  <td>Otto</td>-->
-    <!--                  <td>@mdo</td>-->
-    <!--                </tr>-->
-    <!--                <tr class="info">-->
-    <!--                  <td>2</td>-->
-    <!--                  <td>Jacob</td>-->
-    <!--                  <td>Thornton</td>-->
-    <!--                  <td>@fat</td>-->
-    <!--                </tr>-->
-    <!--                <tr class="warning">-->
-    <!--                  <td>3</td>-->
-    <!--                  <td>Larry</td>-->
-    <!--                  <td>the Bird</td>-->
-    <!--                  <td>@twitter</td>-->
-    <!--                </tr>-->
-    <!--                <tr class="danger">-->
-    <!--                  <td>4</td>-->
-    <!--                  <td>John</td>-->
-    <!--                  <td>Smith</td>-->
-    <!--                  <td>@jsmith</td>-->
-    <!--                </tr>-->
-    <!--                </tbody>-->
-    <!--              </table>-->
-    <!--            </div>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--        &lt;!&ndash;  end  Context Classes  &ndash;&gt;-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!-- /. ROW  -->
+              <div class="panel-heading">
+                New Fournisseurs
+              </div>
 
-    <!-- /. PAGE INNER  -->
-
-    <!-- /. PAGE WRAPPER  -->
-    <!-- /. WRAPPER  -->
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Frs</th>
+                      <th>tel</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let g of newfournisseur" class="success">
+                      <td>{{g.id}}</td>
+                      <td>{{g.nomfournissuer}}</td>
+                      <td>{{g.telephone}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!--  end  Context Classes  -->
+          </div>
+        </div>
+  </div>
+</div>

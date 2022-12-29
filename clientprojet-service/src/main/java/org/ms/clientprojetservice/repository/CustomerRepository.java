@@ -9,6 +9,5 @@ import java.util.List;
 
 @RepositoryRestController
 public interface CustomerRepository extends JpaRepository<Customer,Long> {
-
     List<Customer> findCustomerByAccountOpenedDate(Date acDate);
 }

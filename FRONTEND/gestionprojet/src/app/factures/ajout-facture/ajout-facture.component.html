@@ -1,0 +1,108 @@
+<div id="page-wrapper" >
+  <div class="header">
+    <h1 class="page-header">
+      Formulaire Facture <small>Ajout Facture.</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a>Home</a></li>
+      <li><a>Facture</a></li>
+      <li class="active">Ajout</li>
+    </ol>
+
+  </div>
+
+  <div id="page-inner">
+    <div class="row">
+      <div class="col-xs-12">
+        <!--        (ngSubmit)="ajoutProudit()"-->
+        <form >
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="card-title">
+                <div class="title">Formulaire Produit</div>
+              </div>
+            </div>
+            <div class="center">
+              <button type="submit" class="btn btn-info mr-10" (click)="ajoutFacture()">Ajouter</button>
+              <button type="reset" class="btn btn-danger mr-10" (click)="resetFacture()">Annuler</button>
+            </div>
+            <div class="panel-body">
+
+            <div class="sub-title">Date Facature</div>
+            <div>
+              <h5>{{date_jour | date:'fullDate'}}</h5>
+            </div>
+              <div class="sub-title">Sélectionner Client</div>
+              <div class="form-group col-md-6">
+                <select #selectedClient>
+                  <option *ngFor="let s of clients" [value]="s.id">
+                    {{s.customerName}}[{{s.phoneNumber}}]
+                  </option>
+                </select>
+                <br><br>
+                <div>
+                  <span class="badge bg-success">Client : {{messageclient}}</span>
+                </div>
+
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-success" (click)="getValueFromSelectClient(selectedClient.value)"><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+              <br><br><hr>
+              <div class="sub-title">Sélectionner Produit</div>
+              <div class="form-group">
+                <select #selectedProduit>
+                  <option *ngFor="let d of produits" [value]="d.id">
+                    {{d.stockItemName}} description : {{d.carateristique}} Qte : {{d.quantity}}
+                  </option>
+                </select>
+              </div>
+              <div class="sub-title">Quantite</div>
+              <div class="col-md-6">
+                <input type="number" class="form-control"  placeholder="Number input" name="price" [(ngModel)]="quantite" >
+                <span class="badge bg-primary, text-danger">{{message}}</span>
+              </div>
+              <div class="col-md-6">
+              <button class="btn btn-success" (click)="getValueFromSelectProduit(selectedProduit.value)"><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+              </div>
+
+
+          <div class="panel-body">
+            <div class="table-responsive table-bordered">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>produit id</th>
+                  <th>description</th>
+                  <th>Qte_stock</th>
+                  <th>Qte_commandée</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let g of lsLigneOrder">
+                  <td>{{g.id}}</td>
+                  <td>{{g.produitid}}</td>
+                  <td>{{g.description}}</td>
+                  <td>{{g.QteStock}}</td>
+                  <td>{{g.QteCmmd}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- /. PAGE INNER  -->
+</div>
+
+<!-- /. PAGE WRAPPER  -->
+

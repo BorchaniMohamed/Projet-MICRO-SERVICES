@@ -10,6 +10,5 @@ public interface AdresseService {
     Adresse save(Adresse adresse);
     Adresse findById(long id);
     List<Adresse> findAll();
-
     List<Adresse> findNewAdresse();
 }
