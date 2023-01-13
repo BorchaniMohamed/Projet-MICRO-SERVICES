@@ -1,11 +1,11 @@
 <div id="page-wrapper" >
   <div class="header">
     <h1 class="page-header">
-      Formulaire Client <small>Ajout Client.</small>
+      Formulaire Produit <small>Ajout Produit.</small>
     </h1>
     <ol class="breadcrumb">
       <li><a>Home</a></li>
-      <li><a>Client</a></li>
+      <li><a>Produit</a></li>
       <li class="active">Ajout</li>
     </ol>
 
@@ -24,7 +24,7 @@
             </div>
             <div class="center">
               <button type="submit" class="btn btn-info mr-10" (click)="ajoutProudit()">Ajouter</button>
-              <button type="reset" class="btn btn-danger mr-10">Annuler</button>
+              <button type="reset" class="btn btn-danger mr-10" (click)="resetaction()">Annuler</button>
 
             </div>
             <div class="panel-body">
@@ -44,7 +44,7 @@
               <div>
                 <input type="number" class="form-control"  placeholder="Number input" name="price" [(ngModel)]="newproduit.price">
               </div>
-              <div class="sub-title">Quntite</div>
+              <div class="sub-title">Quantité</div>
               <div>
                 <input type="number" class="form-control"  placeholder="Number input" name="quantity" [(ngModel)]="newproduit.quantity">
               </div>
@@ -58,23 +58,35 @@
               </div>
 
               <div class="sub-title">Sélectionner Gatégorie</div>
-              <div class="form-group">
-                <select #selectedCategorie>
+              <div class="form-group col-md-3">
+                <select #selectedCategorie class="form-control">
                   <option *ngFor="let s of categories" [value]="s.id">
                     {{s.stockItemCategoryName}}
                   </option>
                 </select>
-                <button (click)="getValueFromSelectCategorie(selectedCategorie.value)"><span class="glyphicon glyphicon-plus"></span></button>
+                <br>
+                <div>
+                  <span class="badge bg-success">Catégorie : {{messagecategorie}}</span>
+                </div>
               </div>
+              <div class="col-md-3">
+                <button class="btn btn-success" (click)="getValueFromSelectCategorie(selectedCategorie.value)"><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+              <br><br><br><br><br><br>
                   <div class="sub-title">Sélectionner Fournisseur</div>
-              <div class="form-group">
-                <select #selectedFrs>
+              <div class="form-group col-md-3">
+                <select #selectedFrs class="form-control">
                   <option *ngFor="let d of fournisseurs" [value]="d.id">
                     {{d.nomfournissuer}}
                   </option>
                 </select>
-
-                <button (click)="getValueFromSelectFournisseur(selectedFrs.value)"><span class="glyphicon glyphicon-plus"></span></button>
+                <br>
+                <div>
+                  <span class="badge bg-success">Fournisseur : {{messageFournisseur}}</span>
+                </div>
+              </div>
+                <div class="col-md-3">
+                <button class="btn btn-success" (click)="getValueFromSelectFournisseur(selectedFrs.value)"><span class="glyphicon glyphicon-plus"></span></button>
               </div>
 
             </div>

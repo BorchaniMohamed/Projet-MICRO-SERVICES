@@ -6,7 +6,7 @@ import {FacturesComponent} from "./factures/factures.component";
 import {TransactionsComponent} from "./transactions/transactions.component";
 import {MenuComponent} from "./base/menu/menu.component";
 import {SlidebarComponent} from "./base/slidebar/slidebar.component";
-import {HomepageComponent} from "./base/homepage/homepage.component";
+import {HomepageComponent} from "./base/devise/homepage.component";
 import {StatistiqueComponent} from "./statistique/statistique.component";
 import {AjoutClientComponent} from "./customers/ajout-client/ajout-client.component";
 import {EditClientComponent} from "./customers/edit-client/edit-client.component";

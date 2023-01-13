@@ -47,4 +47,14 @@ export class ProduitService {
   UpdateProduitQuantite(id:any,qte:any):Observable<Produit>{
     return this.http.get<Produit>(this.url+'stockItems/'+id+'/'+qte);
   }
+  AddFournisseur(fournisseur:Fournisseur):Observable<Fournisseur>{
+    console.log(JSON.stringify(fournisseur))
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post<Fournisseur>(this.url+'fournisseurs',fournisseur,{headers:headers});
+  }
+  AddCategProduit(categorieproduit:CategorieProduit):Observable<CategorieProduit>{
+    console.log(JSON.stringify(categorieproduit))
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post<CategorieProduit>(this.url+'stockItemCategories',categorieproduit,{headers:headers});
+  }
 }

@@ -1,12 +1,10 @@
 <div id="page-wrapper" >
   <div class="header">
     <h1 class="page-header">
-      Page Clients  <small>Tableaux réactifs</small>
+      Page Clients  <small>{{customers.length}} Clients</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a routerLink="/statistique">Home</a></li>
-      <li><a>Clients</a></li>
-      <li class="active">Données</li>
+      <li>{{date| date:'medium'}}</li>
     </ol>
 
   </div>
@@ -22,7 +20,7 @@
           </div>
           <div class="panel-body">
             <div class="table-responsive">
-              <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+              <table class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>#</th>
@@ -54,7 +52,7 @@
             </div>
 
           </div>
-        </div>,
+        </div>
         <!--End Advanced Tables -->
       </div>
     </div>
@@ -64,9 +62,21 @@
         <!--   Kitchen Sink -->
         <div class="panel panel-default">
           <div class="panel-heading">
-            Liste Catégories
+            Liste Catégories ({{categories.length}})
           </div>
           <div class="panel-body">
+            <div class="center">
+              <button type="submit" class="btn btn-info" (click)="ajoutCategorie()">Ajouter</button>
+            </div>
+
+              <div class="sub-title">Nom Catégorie</div>
+              <div>
+                <input type="text" class="form-control" placeholder="Text input" name="customerName" [(ngModel)]="nomcategorie" >
+              </div>
+            <div>
+              <span class="badge bg-success">Catégorie : {{message}}</span>
+            </div>
+            <hr>
             <div class="table-responsive">
               <table class="table table-striped table-bordered table-hover">
                 <thead>
@@ -91,25 +101,27 @@
         <!--   Basic Table  -->
         <div class="panel panel-default">
           <div class="panel-heading">
-            Nouveaux Adresse de livraison
+            Nouvelles Adresses de livraison
           </div>
           <div class="panel-body">
             <div class="table-responsive">
               <table class="table">
                 <thead>
                 <tr>
-                  <th>Gouvernorat</th>
-                  <th>Delegation</th>
-                  <th>Localite</th>
+                  <th>Pays</th>
+                  <th>Ville</th>
+                  <th>Adresse</th>
                   <th>Code postale</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let d of adresses">
+                  <ng-container *ngIf="d.gouvernorat!=null">
                   <td>{{d.id}}#{{d.gouvernorat}}</td>
                   <td>{{d.delegation}}</td>
                   <td>{{d.localite}}</td>
                   <td>{{d.codepostale}}</td>
+                  </ng-container>
                 </tr>
                 </tbody>
               </table>
@@ -169,9 +181,11 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let v of todoclient">
+                  <ng-container *ngIf="v.actionToDo!=null">
                   <td>{{v.id}}</td>
                   <td>{{v.actionToDo}}</td>
                   <td>{{v.dateOfAction}}</td>
+                    </ng-container>
                 </tr>
                 </tbody>
               </table>
@@ -180,107 +194,8 @@
         </div>
         <!--  End  Bordered Table  -->
       </div>
+
     </div>
-    <!-- /. ROW  -->
-<!--    <div class="row">-->
-<!--      <div class="col-md-6">-->
-<!--        &lt;!&ndash;    Hover Rows  &ndash;&gt;-->
-<!--        <div class="panel panel-default">-->
-<!--          <div class="panel-heading">-->
-<!--            Hover Rows-->
-<!--          </div>-->
-<!--          <div class="panel-body">-->
-<!--            <div class="table-responsive">-->
-<!--              <table class="table table-hover">-->
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                  <th>#</th>-->
-<!--                  <th>First Name</th>-->
-<!--                  <th>Last Name</th>-->
-<!--                  <th>Username</th>-->
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                <tbody>-->
-<!--                <tr>-->
-<!--                  <td>1</td>-->
-<!--                  <td>Mark</td>-->
-<!--                  <td>Otto</td>-->
-<!--                  <td>@mdo</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                  <td>2</td>-->
-<!--                  <td>Jacob</td>-->
-<!--                  <td>Thornton</td>-->
-<!--                  <td>@fat</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                  <td>3</td>-->
-<!--                  <td>Larry</td>-->
-<!--                  <td>the Bird</td>-->
-<!--                  <td>@twitter</td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--              </table>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; End  Hover Rows  &ndash;&gt;-->
-<!--      </div>-->
-<!--      <div class="col-md-6">-->
-<!--        &lt;!&ndash;    Context Classes  &ndash;&gt;-->
-<!--        <div class="panel panel-default">-->
 
-<!--          <div class="panel-heading">-->
-<!--            Context Classes-->
-<!--          </div>-->
-
-<!--          <div class="panel-body">-->
-<!--            <div class="table-responsive">-->
-<!--              <table class="table">-->
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                  <th>#</th>-->
-<!--                  <th>First Name</th>-->
-<!--                  <th>Last Name</th>-->
-<!--                  <th>Username</th>-->
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                <tbody>-->
-<!--                <tr class="success">-->
-<!--                  <td>1</td>-->
-<!--                  <td>Mark</td>-->
-<!--                  <td>Otto</td>-->
-<!--                  <td>@mdo</td>-->
-<!--                </tr>-->
-<!--                <tr class="info">-->
-<!--                  <td>2</td>-->
-<!--                  <td>Jacob</td>-->
-<!--                  <td>Thornton</td>-->
-<!--                  <td>@fat</td>-->
-<!--                </tr>-->
-<!--                <tr class="warning">-->
-<!--                  <td>3</td>-->
-<!--                  <td>Larry</td>-->
-<!--                  <td>the Bird</td>-->
-<!--                  <td>@twitter</td>-->
-<!--                </tr>-->
-<!--                <tr class="danger">-->
-<!--                  <td>4</td>-->
-<!--                  <td>John</td>-->
-<!--                  <td>Smith</td>-->
-<!--                  <td>@jsmith</td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--              </table>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash;  end  Context Classes  &ndash;&gt;-->
-<!--      </div>-->
-<!--    </div>-->
-    <!-- /. ROW  -->
-
-<!-- /. PAGE INNER  -->
-
-<!-- /. PAGE WRAPPER  -->
-<!-- /. WRAPPER  -->
+  </div>
+</div>

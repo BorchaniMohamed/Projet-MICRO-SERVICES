@@ -19,7 +19,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">
               <div class="card-title">
-                <div class="title">Formulaire Produit</div>
+                <div class="title">Formulaire Facture</div>
               </div>
             </div>
             <div class="center">
@@ -34,12 +34,12 @@
             </div>
               <div class="sub-title">Sélectionner Client</div>
               <div class="form-group col-md-6">
-                <select #selectedClient>
+                <select #selectedClient class="form-control">
                   <option *ngFor="let s of clients" [value]="s.id">
                     {{s.customerName}}[{{s.phoneNumber}}]
                   </option>
                 </select>
-                <br><br>
+                <br>
                 <div>
                   <span class="badge bg-success">Client : {{messageclient}}</span>
                 </div>
@@ -48,15 +48,16 @@
               <div class="col-md-6">
                 <button class="btn btn-success" (click)="getValueFromSelectClient(selectedClient.value)"><span class="glyphicon glyphicon-plus"></span></button>
               </div>
-              <br><br><hr>
+              <br><br><br><br>
               <div class="sub-title">Sélectionner Produit</div>
-              <div class="form-group">
-                <select #selectedProduit>
+              <div class="form-group col-md-6" >
+                <select #selectedProduit class="form-control">
                   <option *ngFor="let d of produits" [value]="d.id">
                     {{d.stockItemName}} description : {{d.carateristique}} Qte : {{d.quantity}}
                   </option>
                 </select>
               </div>
+              <br><br><br>
               <div class="sub-title">Quantite</div>
               <div class="col-md-6">
                 <input type="number" class="form-control"  placeholder="Number input" name="price" [(ngModel)]="quantite" >
@@ -69,24 +70,27 @@
 
 
           <div class="panel-body">
+            <div class="sub-title">Linges Facture</div>
             <div class="table-responsive table-bordered">
               <table class="table">
                 <thead>
                 <tr>
-                  <th>id</th>
-                  <th>produit id</th>
-                  <th>description</th>
-                  <th>Qte_stock</th>
+                  <th>#</th>
+                  <th>Produit</th>
+                  <th>Catégorie</th>
+                  <th>PU</th>
                   <th>Qte_commandée</th>
+                  <th>Total</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let g of lsLigneOrder">
                   <td>{{g.id}}</td>
-                  <td>{{g.produitid}}</td>
-                  <td>{{g.description}}</td>
-                  <td>{{g.QteStock}}</td>
+                  <td>{{g.produitid}}- {{g.description}}</td>
+                  <td>{{g.categorieproduit}}</td>
+                  <td>{{g.prixprouit}}</td>
                   <td>{{g.QteCmmd}}</td>
+                  <td>{{g.totalligne}}</td>
                 </tr>
                 </tbody>
               </table>

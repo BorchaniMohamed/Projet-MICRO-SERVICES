@@ -33,4 +33,21 @@ export class FactureService {
   UpdateStatutFacture(id:number):Observable<Facture>{
     return this.http.get<Facture>(this.url+'editinvoicestatu/'+id);
   }
+  GetNombreFactureByProduit(id:number):Observable<number>
+  {return this.http.get<number>(this.url+'nombreInvoicesByProduct/'+id)}
+
+  GetFactureByID(id:any):Observable<Facture>{
+    return this.http.get<Facture>(this.url+'invoices/'+id);
+  }
+  getBestClients = (): Observable<any> => {
+    return this.http.get<any>(this.url+'bestcustomer');
+  };
+  GetCAByIDClient(id:any):Observable<any>{
+    return this.http.get<any>(this.url+'cabycustomer/'+id);
+  }
+  getstatistiqueclient():Observable<any>{
+    return this.http.get<any>(this.url+'statistiqueclient/');
+  }
+
+
 }

@@ -51,26 +51,27 @@ export class AjoutFactureComponent implements OnInit{
   }
 
   ajoutFacture() {
-      this.newFacture.customerId=this.id_client;
-      this.newFacture.invoiceDate=new Date();
-      this.newFacture.invoiceLines= [];
-      // for(var i = 0; i < this.id_produit.length; i++){
-      //   this.newFacture.invoiceLines[i]=new LigneFacture();
-      //   this.newFacture.invoiceLines[i].stockItemId=Number(this.id_produit[i]);
-      //   this.newFacture.invoiceLines[i].quantity=Number(this.qte_cmd[i]);
-      // }
-    for(var i = 0; i < this.lsLigneOrder.length; i++){
-      this.newFacture.invoiceLines[i]=new LigneFacture();
-      this.newFacture.invoiceLines[i].stockItemId=this.lsLigneOrder[i].produitid;
-      this.newFacture.invoiceLines[i].quantity=this.lsLigneOrder[i].QteCmmd;
+   if(this.lsLigneOrder.length<=0)
+   {window.alert("Facture vide")}
+    else if(this.messageclient==undefined||this.messageclient.length<=0)
+    {window.alert("Ajouter un client")}
+    else{
+     this.newFacture.customerId=this.id_client;
+     this.newFacture.invoiceDate=new Date();
+     this.newFacture.invoiceLines= [];
+     for(var i = 0; i < this.lsLigneOrder.length; i++){
+       this.newFacture.invoiceLines[i]=new LigneFacture();
+       this.newFacture.invoiceLines[i].stockItemId=this.lsLigneOrder[i].produitid;
+       this.newFacture.invoiceLines[i].quantity=this.lsLigneOrder[i].QteCmmd;
+     }
+     console.log(this.newFacture);
+     this.factureservice.AddFacture(this.newFacture).subscribe(data=>this.router.navigate(['factures']));
+     for(var i = 0; i < this.lsLigneOrder.length; i++)
+     {
+       this.lsLigneOrder[i].QteCmmd;
+       this.produitservice.UpdateProduitQuantite(this.lsLigneOrder[i].produitid,this.lsLigneOrder[i].QteCmmd).subscribe();
+     }
     }
-      console.log(this.newFacture);
-      this.factureservice.AddFacture(this.newFacture).subscribe(data=>this.router.navigate(['factures']));
-    for(var i = 0; i < this.lsLigneOrder.length; i++){
-      this.lsLigneOrder[i].QteCmmd;
-      this.produitservice.UpdateProduitQuantite(this.lsLigneOrder[i].produitid,this.lsLigneOrder[i].QteCmmd).subscribe();
-    }
-
   }
 
   getValueFromSelectClient(value: any) {
@@ -88,11 +89,6 @@ export class AjoutFactureComponent implements OnInit{
 
 
   getValueFromSelectProduit(value: any) {
-    // this.lignefacture[this.taille]=new LigneFacture();
-    // this.lignefacture[this.taille].id=this.taille;
-    // this.lignefacture[this.taille].quantity=this.quantite;
-    // console.log(this.lignefacture[this.taille].id=this.taille,' ', this.lignefacture[this.taille].quantity=this.quantite)
-
     this.produitservice.GetProduit(value).subscribe(data => {
       this.p = data;
       console.log(this.p);
@@ -116,10 +112,10 @@ export class AjoutFactureComponent implements OnInit{
         val.produitid=this.p.id;
         val.QteCmmd=this.quantite;
         val.QteStock=this.p.quantity;
+        val.prixprouit=this.p.price;
+        val.totalligne=this.p.price*this.quantite;
+        val.categorieproduit=this.p.categorie.stockItemCategoryName;
         this.lsLigneOrder.push(val);
-
-        // this.id_produit.push(Number(value));
-        // this.qte_cmd.push(this.quantite);
         this.taille=this.taille+1;
         console.log(this.lsLigneOrder);
       }
@@ -132,7 +128,8 @@ export class AjoutFactureComponent implements OnInit{
 
 
   resetFacture() {
-    this.lsLigneOrder=[]
+    this.lsLigneOrder=[];
+    this.messageclient="";
   }
 }
 class LigneOrder{
@@ -141,5 +138,8 @@ class LigneOrder{
   description!:string;
   QteStock!:number;
   QteCmmd!:number;
+  prixprouit!:number;
+  totalligne!:number;
+  categorieproduit!:string;
 
 }

@@ -33,8 +33,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer save(Customer customer) {
-        adresseRepository.save(customer.getAdresse());
-        toDoCustomerRepository.save(customer.getTodocustomer());
+            adresseRepository.save(customer.getAdresse());
+            toDoCustomerRepository.save(customer.getTodocustomer());
         CustomerCategory customerCategory=customerCategoryRepository.getById(customer.getCustomerCategory().getId());
         customer.setCustomerCategory(customerCategory);
         return customerRepository.save(customer);

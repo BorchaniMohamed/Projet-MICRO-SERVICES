@@ -24,7 +24,7 @@
             </div>
             <div class="center">
               <button type="submit" class="btn btn-info mr-10" (click)="modifierProduit()">Modifier</button>
-              <button type="reset" class="btn btn-danger mr-10">Annuler</button>
+              <button type="reset" class="btn btn-danger mr-10"(click)="resetaction()">Annuler</button>
 
             </div>
             <div class="panel-body">
@@ -61,24 +61,37 @@
               </div>
 
               <div class="sub-title">Sélectionner Gatégorie</div>
-              <div class="form-group">
-                <select #selectedCategorie>
+              <div class="form-group col-md-3">
+                <select #selectedCategorie class="form-control">
                   <option *ngFor="let s of categories" [value]="s.id">
                     {{s.stockItemCategoryName}}
                   </option>
                 </select>
-                <button (click)="getValueFromSelectCategorie(selectedCategorie.value)"><span class="glyphicon glyphicon-plus"></span></button>
+                <br>
+                <div>
+                  <span class="badge bg-success">Catégorie : {{messagecategorie}}</span>
+                </div>
               </div>
+              <div class="col-md-3">
+                <button class="btn btn-success" (click)="getValueFromSelectCategorie(selectedCategorie.value)"><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+              <br><br><br><br><br><br>
               <div class="sub-title">Sélectionner Fournisseur</div>
-              <div class="form-group">
-                <select #selectedFrs>
+              <div class="form-group col-md-3">
+                <select #selectedFrs class="form-control">
                   <option *ngFor="let d of fournisseurs" [value]="d.id">
                     {{d.nomfournissuer}}
                   </option>
                 </select>
-
-                <button (click)="getValueFromSelectFournisseur(selectedFrs.value)"><span class="glyphicon glyphicon-plus"></span></button>
+                <br>
+                <div>
+                  <span class="badge bg-success">Fournisseur : {{messageFournisseur}}</span>
+                </div>
               </div>
+              <div class="col-md-3">
+                <button class="btn btn-success" (click)="getValueFromSelectFournisseur(selectedFrs.value)"><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+
 
             </div>
           </div>

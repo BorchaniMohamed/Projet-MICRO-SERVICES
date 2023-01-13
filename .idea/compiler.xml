@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eurekaprojet-service" />
         <module name="authentification-service" />
+        <module name="device-Service" />
         <module name="clientprojet-service" />
         <module name="gatewayprojet-service" />
         <module name="produitprojet-service" />
@@ -19,6 +20,7 @@
     <bytecodeTargetLevel>
       <module name="authentification-service" target="1.8" />
       <module name="clientprojet-service" target="1.8" />
+      <module name="device-Service" target="1.8" />
       <module name="eurekaprojet-service" target="1.8" />
       <module name="factureprojet-service" target="1.8" />
       <module name="gatewayprojet-service" target="1.8" />
@@ -30,6 +32,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="authentification-service" options="-parameters" />
       <module name="clientprojet-service" options="-parameters" />
+      <module name="device-Service" options="-parameters" />
       <module name="eurekaprojet-service" options="-parameters" />
       <module name="factureprojet-service" options="-parameters" />
       <module name="gatewayprojet-service" options="-parameters" />

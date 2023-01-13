@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/authentification-service/authentification-service.iml" filepath="$PROJECT_DIR$/authentification-service/authentification-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/clientprojet-service/clientprojet-service.iml" filepath="$PROJECT_DIR$/clientprojet-service/clientprojet-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/device-Service/device-Service.iml" filepath="$PROJECT_DIR$/device-Service/device-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/eurekaprojet-service/eurekaprojet-service.iml" filepath="$PROJECT_DIR$/eurekaprojet-service/eurekaprojet-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/factureprojet-service/factureprojet-service.iml" filepath="$PROJECT_DIR$/factureprojet-service/factureprojet-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/gatewayprojet-service/gatewayprojet-service.iml" filepath="$PROJECT_DIR$/gatewayprojet-service/gatewayprojet-service.iml" />

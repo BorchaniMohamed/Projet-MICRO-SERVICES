@@ -20,33 +20,45 @@ export class AjoutClientComponent implements OnInit{
   adresseclient : Adresse = new Adresse();
   todoclient : todoClient = new todoClient();
   categclient !: Categorie;
+  categories = new Array<Categorie>();
   idcategorie !: number;
   form: FormGroup | undefined;
+  message!: string;
 
 
   constructor(private clientService : ClientService,private router : Router) {}
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.clientService.getAllClientsCategories().subscribe(data=>this.categories=data);
+  }
   ajoutClient(){
-    this.todoclient.dateOfAction = new Date();
-    this.newclient.accountOpenedDate = new Date();
-    this.newclient.adresse = new Adresse();
-    this.newclient.todocustomer= new todoClient();
-    this.newclient.customerCategory = new Categorie();
-    //this.newclient.customerCategory.id = this.idcatecorie;
+    if(this.idcategorie==undefined||this.idcategorie<0)
+    {
+      this.message="Choisir une Catégorie"
+    }
+    else
+    {
+      this.todoclient.dateOfAction = new Date();
+      this.newclient.accountOpenedDate = new Date();
+      this.newclient.adresse = new Adresse();
+      this.newclient.todocustomer= new todoClient();
+      this.newclient.customerCategory = new Categorie();
+      this.newclient.adresse = this.adresseclient;
+      this.newclient.customerCategory.id = this.idcategorie;
+      this.newclient.todocustomer = this.todoclient;
+      this.clientService.AddClient(this.newclient).subscribe(data=>this.router.navigate(['customers']));
+    }
 
-    //this.clientService.GetCategorieById(this.idcatecorie).subscribe(data=>this.categclient=data),
-      //(err:any)=>console.log(err);
-    //this.clientService.AddAdresse(this.adresseclient).subscribe(data=>  this.adresseclient = data,(err:any)=>console.log(err));
-    //this.clientService.AddtodoActionClient(this.todoclient).subscribe(data=> {
-      //this.todoclient = data;
-      //this.newclient.todocustomer.id = this.todoclient.id;
-    //},(err:any)=>console.log(err));
-    this.newclient.adresse = this.adresseclient;
-    this.newclient.customerCategory.id = this.idcategorie;
-    this.newclient.todocustomer = this.todoclient;
-    this.clientService.AddClient(this.newclient).subscribe(data=>this.router.navigate(['customers']));
   }
 
+  getValueFromSelectCategorie(value: any) {
+    console.log(value)
+        this.idcategorie=value
+        this.message="catégorie "+value+" sélectionner"
+  }
+
+  btnannuler() {
+    this.message=""
+  }
 }

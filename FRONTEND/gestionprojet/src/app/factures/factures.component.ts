@@ -13,6 +13,7 @@ export class FacturesComponent implements OnInit{
   factures!: Array<Facture>;
   lfactures!: Array<LigneFacture>;
   newfactures!: Array<Facture>;
+  date=new Date();
 
   constructor(private factureservice : FactureService) {}
   ngOnInit() : void {
@@ -33,4 +34,6 @@ export class FacturesComponent implements OnInit{
   DeleteFacture(id: number) {
     return this.factureservice.DeleteFacture(id).subscribe(data=>{this.loadCFactures()});
   }
+
+
 }

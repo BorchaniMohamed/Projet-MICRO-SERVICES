@@ -46,14 +46,14 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let f of facturesnonpaye" class="odd gradeX">
-                  <ng-container *ngIf="f.states=='Non payé'">
+                  <ng-container *ngIf="f.states=='non payée'">
                   <td>{{f.id}}</td>
                   <td>{{f.invoiceDate | date:'shortDate'}}</td>
                   <td>{{f.states}}</td>
                   <td class="center">{{f.customerId}}# {{f.customer.customerName}}</td>
                   <td class="center">{{f.amount}}</td>
                   <td>
-                    <button class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" (click)="PayeFacture(f)"> Payé</span></button>
+                    <button class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" (click)="PayeFacture(f)"> Payer</span></button>
 <!--                    <button class="btn btn-success"><span class="glyphicon glyphicon-pencil" aria-hidden="true" [routerLink]="['/edit-facture/',f.id]"></span></button>-->
                   </td>
                   </ng-container>

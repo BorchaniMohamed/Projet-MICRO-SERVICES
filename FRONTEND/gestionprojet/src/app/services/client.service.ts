@@ -49,11 +49,17 @@ export class ClientService {
       const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
       return this.http.post<todoClient>(this.url+'toDoCustomers',todoclient, {headers : headers});
     }
+    AddGategorieClient(categorie : Categorie):Observable<Categorie>{
+      return this.http.post<Categorie>(this.url+'customerCategories',categorie)
+    }
     GetClient(id:any):Observable<Client>{
       return this.http.get<Client>(this.url+'customers/'+id);
     }
     UpdateClient(id:any,client:Client):Observable<Client>{
       return this.http.put<Client>(this.url+'customers/'+id,client);
+    }
+    GetInfoClient=():Observable<any>=>{
+      return this.http.get<any>(this.url+'infocustomers');
     }
 
 

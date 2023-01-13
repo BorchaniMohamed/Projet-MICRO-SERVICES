@@ -1,36 +1,36 @@
-<div id="page-wrapper" >
+<div id="page-wrapper" xmlns="http://www.w3.org/1999/html">
   <div class="header">
     <h1 class="page-header">
-      Page Produits  <small>Tableaux réactifs</small>
+      Page Produits  <small>{{produits.length}} Produits</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a routerLink="/statistique">Home</a></li>
-      <li><a>Produits</a></li>
-      <li class="active">Données</li>
+      <li>{{date| date:'medium'}}</li>
     </ol>
 
   </div>
 
   <div id="page-inner">
-
     <div class="row">
       <div class="col-md-12">
         <!-- Advanced Tables -->
         <div class="panel panel-default">
           <div class="panel-heading">
-            Liste Produis
+            Liste Produits
           </div>
           <div class="panel-body">
             <div class="table-responsive">
-              <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+              <table class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>#</th>
                   <th>Nom</th>
                   <th>Marque</th>
-                  <th>Description</th>
+                  <th>Desc</th>
                   <th>Prix</th>
                   <th>Qte</th>
+                  <th>Frs</th>
+                  <th>Validité</th>
+                  <th>Catégorie</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,6 +41,9 @@
                   <td>{{p.carateristique}}</td>
                   <td class="center">{{p.price}}</td>
                   <td class="center">{{p.quantity}}</td>
+                  <td>{{getFrs(p)}}</td>
+                  <td>{{p.validForm}} -to- {{p.validTo}}</td>
+                  <td>{{p.categorie.stockItemCategoryName}}</td>
                   <td>
                     <button class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true" (click)="DeleteProduit(p.id)"></span></button>
                     <button class="btn btn-success"><span class="glyphicon glyphicon-pencil" aria-hidden="true" [routerLink]="['/editproduit/',p.id]"></span></button>
@@ -66,6 +69,17 @@
             Liste Catégories
           </div>
           <div class="panel-body">
+            <div class="center">
+              <button type="submit" class="btn btn-info" (click)="ajoutCategorie()">Ajouter</button>
+            </div>
+            <div class="sub-title">Nom Catégorie</div>
+            <div>
+              <input type="text" class="form-control" placeholder="Text input" name="customerName" [(ngModel)]="nomcategorie" >
+            </div>
+            <div>
+              <span class="badge bg-success">Catégorie : {{messageCategorie}}</span>
+            </div>
+            <hr>
             <div class="table-responsive">
               <table class="table table-striped table-bordered table-hover">
                 <thead>
@@ -90,25 +104,46 @@
         <!--   Basic Table  -->
         <div class="panel panel-default">
           <div class="panel-heading">
-            Validité Produit
+            Liste Fournisseurs
           </div>
           <div class="panel-body">
+            <div class="center">
+              <button type="submit" class="btn btn-info" (click)="ajoutFournisseur()">Ajouter</button>
+            </div>
+            <div class="sub-title">Nom Fournisseur</div>
+            <div>
+              <input type="text" class="form-control" placeholder="Text input" name="customerName" [(ngModel)]="nomfournisseur" >
+            </div>
+            <div class="sub-title">Téléphone</div>
+            <div>
+              <input type="number" class="form-control" placeholder="Int input" name="customerName" [(ngModel)]="telfournisseur" >
+            </div>
+            <div class="sub-title">Email</div>
+            <div>
+              <input type="email" class="form-control" placeholder="Email input" name="customerName" [(ngModel)]="emailfournisseur" >
+            </div>
+            <div>
+              <span class="badge bg-success">Fournisseur : {{messagefournisseur}}</span>
+            </div>
+            <hr>
             <div class="table-responsive">
               <table class="table">
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>Produit</th>
-                  <th>Valide From</th>
-                  <th>Valide To</th>
+                  <th>Nom</th>
+                  <th>Tel</th>
+                  <th>Mail</th>
+                  <th>Date Création</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let p of produits">
+                <tr *ngFor="let p of fournisseurs">
                   <td>{{p.id}}</td>
-                  <td>{{p.stockItemName}}</td>
-                  <td>{{p.validForm}}</td>
-                  <td>{{p.validTo}}</td>
+                  <td>{{p.nomfournissuer}}</td>
+                  <td>{{p.telephone}}</td>
+                  <td>{{p.email}}</td>
+                  <td>{{p.accountOpenedDate}}</td>
                 </tr>
                 </tbody>
               </table>
@@ -119,73 +154,6 @@
       </div>
     </div>
     <!-- /. ROW  -->
-    <div class="row">
-      <div class="col-md-6">
-        <!--    Striped Rows Table  -->
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            Produits - Catégories
-          </div>
-          <div class="panel-body">
-            <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Prdouit</th>
-                  <th>Id</th>
-                  <th>Categorie</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let p of produits">
-                  <td>{{p.id}}</td>
-                  <td>{{p.stockItemName}}</td>
-                  <td>{{p.categorie.id}}</td>
-                  <td>{{p.categorie.stockItemCategoryName}}</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <!--  End  Striped Rows Table  -->
-      </div>
-      <div class="col-md-6">
-        <!--    Bordered Table  -->
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            Produits - Fournisseur
-          </div>
-          <!-- /.panel-heading -->
-          <div class="panel-body">
-            <div class="table-responsive table-bordered">
-              <table class="table">
-                <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nom</th>
-                  <th>Fournisseur</th>
-                  <th>Tel Frs</th>
-                  <th>Email</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let p of produits">
-                  <td>{{p.id}}</td>
-                  <td>{{p.stockItemName}}</td>
-                  <td>{{p.fournisseur.nomfournissuer}}</td>
-                  <td>{{p.fournisseur.telephone}}</td>
-                  <td>{{p.fournisseur.email}}</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <!--  End  Bordered Table  -->
-      </div>
-    </div>
 
         <div class="row">
           <div class="col-md-6">
@@ -201,6 +169,7 @@
                     <tr>
                       <th>#</th>
                       <th>Produit</th>
+                      <th>Categorie</th>
                       <th>Date</th>
                     </tr>
                     </thead>
@@ -208,6 +177,7 @@
                     <tr *ngFor="let p of newproduits" class="danger">
                       <td>{{p.id}}</td>
                       <td>{{p.stockItemName}}</td>
+                      <td>{{p.categorie.stockItemCategoryName}}</td>
                       <td>{{p.accountOpenedDate}}</td>
                     </tr>
                     </tbody>
@@ -232,7 +202,8 @@
                     <tr>
                       <th>#</th>
                       <th>Frs</th>
-                      <th>tel</th>
+                      <th>Tel</th>
+                      <th>Email</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -240,6 +211,7 @@
                       <td>{{g.id}}</td>
                       <td>{{g.nomfournissuer}}</td>
                       <td>{{g.telephone}}</td>
+                      <td>{{g.email}}</td>
                     </tr>
                     </tbody>
                   </table>
@@ -249,5 +221,7 @@
             <!--  end  Context Classes  -->
           </div>
         </div>
-  </div>
+
 </div>
+</div>
+

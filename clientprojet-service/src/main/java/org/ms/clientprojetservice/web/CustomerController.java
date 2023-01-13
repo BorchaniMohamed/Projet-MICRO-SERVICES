@@ -13,7 +13,9 @@ import org.ms.clientprojetservice.services.ToDoCustomerService;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
@@ -152,5 +154,24 @@ public class CustomerController {
     public ToDoCustomer editToDoCustomer(@PathVariable Long todocustomerid,@RequestBody ToDoCustomer toDoCustomer) {
         toDoCustomer.setId(todocustomerid);
         return toDoCustomerService.save(toDoCustomer);
+    }
+    @GetMapping("/infocustomers")
+    public Map<String, String[]> infocustomers (){
+        Map<String, String[]> result = new HashMap<>();
+        int nombreClient = customerService.findAll().size();
+        result.put("Clients", new String[]{"fa-male", String.valueOf(nombreClient)});
+        int nombreAdresse = adresseService.findAll().size();
+        result.put("Addresses", new String[]{"fa-book", String.valueOf(nombreAdresse)});
+        int nombreCategorieClient = categoryService.findAll().size();
+        result.put("Catégories", new String[]{"fa-cog",String.valueOf(nombreCategorieClient)});
+        int nombreToDoClient = toDoCustomerService.findAll().size();
+        result.put("ToDos", new String[]{"fa-tag",String.valueOf(nombreToDoClient)});
+        int nombrenewclient = customerService.findNewCustomer().size();
+        int nombrenewadress=adresseService.findNewAdresse().size();
+        int nombrenewtodoclient=toDoCustomerService.findNewToDoCustomers().size();
+        result.put("New Clients", new String[]{"fa-download",String.valueOf(nombrenewclient)});
+        result.put("New Addresses", new String[]{"fa-plus",String.valueOf(nombrenewadress)});
+        result.put("New Todos", new String[]{"fa-plus",String.valueOf(nombrenewtodoclient)});
+        return result;
     }
 }

@@ -1,1 +1,70 @@
+<div id="page-wrapper" >
+  <div class="header">
+    <h1 class="page-header">
+      Facture <small>Détail Facture.</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a>Home</a></li>
+      <li><a>Facture</a></li>
+      <li class="active">Détail</li>
+    </ol>
+
+  </div>
+
+  <div id="page-inner">
+    <div class="row">
+      <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="card-title">
+                <div class="title">Détail Facture</div>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="sub-title">ID_Facture</div>
+              <div>
+                <input type="number" class="form-control" name="Invoice ID" [(ngModel)]="facture.id" readonly>
+              </div>
+              <div class="sub-title">Date Facature</div>
+              <div>
+                <input type="text" class="form-control" placeholder="Text input" name="dateOfBirith" [(ngModel)]="facture.invoiceDate" readonly>
+              </div>
+              <div class="sub-title">Montant Facture</div>
+              <div>
+                <input type="number" class="form-control" placeholder="Int input" name="Monatant" [(ngModel)]="facture.amount" readonly>
+              </div>
+
+            <div class="sub-title">Lignes Facture</div>
+
+
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Id Produit</th>
+                    <th>Produit</th>
+                    <th>Qte</th>
+                    <th>Montant</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let f of lignesfactures" class="odd gradeX">
+                    <td class="col-lg-1">{{f.id}}</td>
+                    <td class="col-md-1">{{f.stockItemId}}</td>
+                    <td class="col-lg-1">{{getstockitemname(f)}}</td>
+                    <td class="col-lg-1">{{f.quantity}}</td>
+                    <td class="col-lg-1">{{f.amountinvoiveline}}</td>
+                  </tr>
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+              </div>
+      </div>
+</div>
+  </div>
+</div>
+
 

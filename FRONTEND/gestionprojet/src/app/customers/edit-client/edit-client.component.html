@@ -1,12 +1,10 @@
 <div id="page-wrapper" >
   <div class="header">
     <h1 class="page-header">
-      Formulaire Client <small>Modifier Client.</small>
+      Formulaire Client <small>Modifier Client</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a>Home</a></li>
-      <li><a>Client</a></li>
-      <li class="active">Modifier</li>
+      <li>{{date| date:'medium'}}</li>
     </ol>
 
   </div>
@@ -14,7 +12,7 @@
   <div id="page-inner">
     <div class="row">
       <div class="col-xs-12">
-        <form (ngSubmit)="modifierClient()">
+        <form>
           <div class="panel panel-default">
             <div class="panel-heading">
               <div class="card-title">
@@ -22,7 +20,7 @@
               </div>
             </div>
             <div class="center">
-              <button type="submit" class="btn btn-success mr-10">Modifier</button>
+              <button type="submit" class="btn btn-success mr-10" (click)="modifierClient()">Modifier</button>
               <button type="reset" class="btn btn-danger mr-10">Annuler</button>
 
             </div>
@@ -47,19 +45,35 @@
               <div>
                 <input type="email" class="form-control" id="exampleInputEmail1" placeholder="jane.doe@example.com" name="customerEmail" [(ngModel)]="client.customerEmail">
               </div>
-              <div class="sub-title">Sélectionner Gatégorie</div>
-              <div class="radio3 radio-check radio-inline">
-                <input  id="radio4" name="radio2" value="2" type="radio" [(ngModel)]="idcategorie">
-                <label for="radio4">
-                  Particulier
-                </label>
+<!--              <div class="sub-title">Sélectionner Gatégorie</div>-->
+<!--              <div class="radio3 radio-check radio-inline">-->
+<!--                <input  id="radio4" name="radio2" value="2" type="radio" [(ngModel)]="idcategorie">-->
+<!--                <label for="radio4">-->
+<!--                  Particulier-->
+<!--                </label>-->
+<!--              </div>-->
+<!--              <div class="radio3 radio-check radio-success radio-inline">-->
+<!--                <input type="radio" id="radio5" name="radio2" value="1" [(ngModel)]="idcategorie">-->
+<!--                <label for="radio5">-->
+<!--                  Entreprise-->
+<!--                </label>-->
+<!--              </div>-->
+              <div class="sub-title">Sélectionner Catégorie</div>
+              <div class="form-group col-md-3">
+                <select #selectedCategorie class="form-control">
+                  <option *ngFor="let d of categories" [value]="d.id">
+                    {{d.id}}# {{d.customerCategoryName}}
+                  </option>
+                </select>
+                <br>
+                <div>
+                  <span class="badge bg-success">Catégorie : {{message}}</span>
+                </div>
               </div>
-              <div class="radio3 radio-check radio-success radio-inline">
-                <input type="radio" id="radio5" name="radio2" value="1" [(ngModel)]="idcategorie">
-                <label for="radio5">
-                  Entreprise
-                </label>
+              <div class="col-md-3">
+                <button class="btn btn-success" (click)="getValueFromSelectCategorie(selectedCategorie.value)"><span class="glyphicon glyphicon-plus"></span></button>
               </div>
+              <br><br><br><br>
               <div class="sub-title">Adresse</div>
               <div>
                 <input type="text" class="form-control mr-20" placeholder="Gouvernerat" name="gouvernorat" [(ngModel)]="client.adresse.gouvernorat">
