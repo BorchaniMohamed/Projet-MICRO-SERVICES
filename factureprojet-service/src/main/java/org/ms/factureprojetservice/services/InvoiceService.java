@@ -1,6 +1,7 @@
 package org.ms.factureprojetservice.services;
 
 import org.ms.factureprojetservice.dto.CAparAnnee;
+import org.ms.factureprojetservice.dto.RangProduit;
 import org.ms.factureprojetservice.dto.StatistiqueClient;
 import org.ms.factureprojetservice.entities.Invoice;
 
@@ -28,10 +29,11 @@ public interface InvoiceService {
     List<Invoice> InvocesByCustomerIdPayed(Long id);
     List<Invoice> InvocesByCustomerIdNoPayed(Long id);
 
-    Map<Long,Long> STOCK_ITEMSByCustomerID(Long id);
+    Map<String,Long> STOCK_ITEMSByCustomerID(Long id);
 
-    Map<Long,Double> bestcustomer();
     List<Map.Entry<Long,Double>> bestcustomer2();
+
+    List<RangProduit> rangproduit();
 
     List<StatistiqueClient> statistique();
 

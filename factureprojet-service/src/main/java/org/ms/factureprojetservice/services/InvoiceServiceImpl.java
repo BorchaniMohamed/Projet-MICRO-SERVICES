@@ -3,6 +3,7 @@ package org.ms.factureprojetservice.services;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.ms.factureprojetservice.dto.CAparAnnee;
+import org.ms.factureprojetservice.dto.RangProduit;
 import org.ms.factureprojetservice.dto.StatistiqueClient;
 import org.ms.factureprojetservice.entities.Invoice;
 import org.ms.factureprojetservice.entities.InvoiceLine;
@@ -151,14 +152,15 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public Double ResteApayer(Long id) {
-        List<Invoice> all = invoiceRepository.findAll();
+//        List<Invoice> all = invoiceRepository.findAll();
         Double amountnotpayed=0.0;
-        for(Invoice invoice:all)
-        {
-            if ("non payée"==invoice.getStates()&&(id==invoice.getCustomerId()))
-                amountnotpayed+=invoice.getAmount();
-
-        }
+        amountnotpayed = invoiceRepository.findNonPayeeInvoicesByCustomerId(id);
+//        for(Invoice invoice:all)
+//        {
+//            if ("non payée"==invoice.getStates()&&(id==invoice.getCustomerId()))
+//                amountnotpayed+=invoice.getAmount();
+//
+//        }
         return amountnotpayed;
     }
 
@@ -189,17 +191,17 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public Map<Long, Long> STOCK_ITEMSByCustomerID(Long id) {
+    public Map<String, Long> STOCK_ITEMSByCustomerID(Long id) {
         List<Invoice> all = invoiceRepository.findAll();
-        Map<Long, Long> result = new HashMap<>();
+        Map<String, Long> result = new HashMap<>();
         for(Invoice invoice:all)
         {
             if (id==invoice.getCustomerId())
             {
                 for(InvoiceLine invoiceLine:invoice.getInvoiceLines())
                 {
-
-                    Long key = invoiceLine.getStockItemId();
+                    invoiceLine.setStockItem(produitServiceClient.findProductById((invoiceLine.getStockItemId())));
+                    String key = "Id:" +invoiceLine.getStockItemId() +"_" +invoiceLine.getStockItem().getStockItemName();
                     if(result.containsKey(key))
                     {
                         Long nb = result.get(key);
@@ -215,69 +217,58 @@ public class InvoiceServiceImpl implements InvoiceService {
         return result;
     }
 
-    @Override
-    public Map<Long, Double> bestcustomer() {
-        Map<Long, Double> result = new HashMap<>();
-        List<Customer> allCustumers = clientServiceClient.findAllCustomers();
-        List<Double> r = new ArrayList<>();
-        List<Long> rr = new ArrayList<>();
-        for(Customer customer: allCustumers)
-        {
-            Long id = customer.getId();
-            Double ca = this.CAByCustomer(id);
-            r.add(ca);
-            rr.add(id);
-
-        }
-        for(int i=0; i < r.size(); i++)
-        {
-            for(int j=1; j < (r.size()-i); j++)
-            {
-                if(r.get(j - 1) < r.get(j))
-                {
-                    //echanges des elements
-                    Double tmp = r.get(j - 1);
-                    r.get(j - 1).equals(r.get(j));
-                    r.get(j).equals(tmp);
-
-                    Long tmp1 = rr.get(j - 1);
-                    rr.get(j - 1).equals(rr.get(j));
-                    rr.get(j).equals(tmp1);
 
 
-                }
 
-            }
-        }
-
-        for(int i=0; i < r.size(); i++)
-        {
-            result.put(rr.get(i),r.get(i));
-        }
-
-        return result;
-    }
 
     @Override
     public List<Map.Entry<Long, Double>> bestcustomer2() {
         List<Map.Entry<Long, Double>> result = new ArrayList<>();
         List<Customer> allCustumers = clientServiceClient.findAllCustomers();
+        log.info(allCustumers.toString());
         for(Customer customer: allCustumers)
         {
-
             Long id = customer.getId();
             Double ca = this.CAByCustomer(id);
+            ca = (ca != null) ? ca : 0.;
             result.add(new AbstractMap.SimpleEntry<>(id, ca));
         }
         result.sort(Comparator.comparingDouble(Map.Entry::getValue));
         return result;
     }
+
+    @Override
+    public List<RangProduit> rangproduit() {
+        List<RangProduit> res = new ArrayList<>();
+
+        Map<Integer, Map<Long, List<InvoiceLine>>> ligneFactureParDateParProduiId = invoiceLineRepository.findAll().stream()
+                .collect(Collectors.groupingBy(lf -> lf.getInvoice().getInvoiceDate().getYear(), // Par Date
+                        Collectors.groupingBy(InvoiceLine::getStockItemId)));// Par produit Id
+
+        ligneFactureParDateParProduiId.forEach((year, longListMap) -> {
+            longListMap.forEach((produitId, invoiceLines) -> {
+                StockItem product = produitServiceClient.findProductById(produitId);
+                Integer qteVendu = invoiceLines.stream().map(InvoiceLine::getQuantity).reduce(Integer::sum).orElse(0);
+                double prixTotal = invoiceLines.stream().mapToDouble(InvoiceLine::getAmountinvoiveline).reduce(Double::sum).orElse(0.);
+                res.add(RangProduit.builder()
+                                .stockItem(product)
+                                .year(year)
+                                .qteVendue(qteVendu)
+                                .prixTotal(prixTotal)
+                        .build());
+            });
+        });
+        res.sort(Comparator.comparing(RangProduit::getQteVendue));
+        return res;
+    }
+
     @Override
     public List<StatistiqueClient> statistique()
     {
         List<Customer> allCustumers = clientServiceClient.findAllCustomers();
         List<StatistiqueClient> statistiqueClient = new ArrayList<>();
-        Map<Long, Long> result = new HashMap<>();
+        Map<String, Long> result = new HashMap<>();
+
         for(Customer customer: allCustumers)
         {
             Long id = customer.getId();
@@ -285,11 +276,21 @@ public class InvoiceServiceImpl implements InvoiceService {
             Double reste = this.ResteApayer(id);
             result = this.STOCK_ITEMSByCustomerID(id);
 
-            List<Invoice> invoices = this.InvocesByCustomerIdPayed(id);
-            List<Invoice> invoices1 = this.InvocesByCustomerIdNoPayed(id);
-            Map<Long, Long> produit=this.STOCK_ITEMSByCustomerID(id);
+            List<Invoice> invoices = invoiceRepository.findAllInvoicesByCustomerIdPayee(id,"payée");
+            for(Invoice a : invoices){
+                for(InvoiceLine b : a.getInvoiceLines()){
+                    b.setStockItem(produitServiceClient.findProductById(b.getStockItemId()));
+                }
+            }
 
-            StatistiqueClient statistiqueClient1=new StatistiqueClient(customer.getCustomerName(),id,ca,reste,invoices,invoices1,produit);
+            List<Invoice> invoices1 = invoiceRepository.findAllInvoicesByCustomerIdPayee(id,"non payée");
+            for(Invoice a : invoices1){
+                for(InvoiceLine b : a.getInvoiceLines()){
+                    b.setStockItem(produitServiceClient.findProductById(b.getStockItemId()));
+                }
+            }
+
+            StatistiqueClient statistiqueClient1=new StatistiqueClient(customer.getCustomerName(),id,ca,reste,invoices,invoices1,result);
             statistiqueClient.add(statistiqueClient1);
 
         }

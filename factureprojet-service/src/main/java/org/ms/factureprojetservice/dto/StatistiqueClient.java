@@ -20,6 +20,6 @@ public class StatistiqueClient {
     private List<Invoice> invoicespayed;
     private List<Invoice> invoicesnotpayed;
     //private Long rang;
-    private Map<Long, Long> stockItems;
+    private Map<String, Long> stockItems;
 
 }

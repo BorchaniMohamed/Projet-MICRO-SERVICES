@@ -24,4 +24,6 @@ public class Transaction {
     @Column(name="amounttransaction")
     private Double amounttransaction;
     private Long invoice_id;
+    private String devise;
+    private Double montant_en_devise;
 }

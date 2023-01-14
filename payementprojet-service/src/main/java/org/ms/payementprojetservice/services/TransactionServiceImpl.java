@@ -6,6 +6,7 @@ import org.ms.payementprojetservice.entities.Transaction;
 import org.ms.payementprojetservice.repository.PayementRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,8 +22,10 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public Transaction save(Transaction transaction) {
-        return payementRepository.save(transaction);
+    public Transaction save(Transaction transaction,Double antagonised) {
+        transaction.setMontant_en_devise(antagonised);
+        Transaction savedtransaction = payementRepository.save(transaction);
+        return savedtransaction;
         }
 
 
@@ -36,7 +39,13 @@ public class TransactionServiceImpl implements TransactionService{
     public List<Transaction> findAll() {
         return payementRepository.findAll();}
 
-
+    @Override
+    public List<Transaction> findTransactionsByTransactionDate() {
+        Date date = new Date();
+        List<Transaction> transactions = payementRepository.findTransactionsByTransactionDate(date);
+        log.info(transactions.toString());
+        return transactions;
+    }
 
 
 }

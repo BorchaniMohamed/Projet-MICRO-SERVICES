@@ -10,6 +10,7 @@ import {TransactionService} from "../services/transaction.service";
 export class TransactionsComponent implements OnInit{
 
   transactions!:Array<Transaction>;
+  date= new Date;
   constructor(private transactionService:TransactionService) {}
   ngOnInit() {
     this.loadTransaction();

@@ -28,9 +28,9 @@ public class TransactionController {
         return transactionService.findById(id);
     }
 
-    @PostMapping("/transactions")
-    public Transaction save(@RequestBody Transaction transaction){
-        return transactionService.save(transaction);
+    @PostMapping("/transactions/{montantdevise}")
+    public Transaction save(@RequestBody Transaction transaction,@PathVariable Double montantdevise){
+        return transactionService.save(transaction,montantdevise);
     }
 
     @GetMapping("/deleteTransaction/{id}" )
@@ -40,5 +40,10 @@ public class TransactionController {
     @GetMapping("/editTransaction/{id}")
     public Transaction editTransaction(@RequestBody Transaction transaction, @PathVariable Long id){
         return null;
+    }
+
+    @GetMapping("newtransactions")
+    public List<Transaction> newtransactions(){
+        return transactionService.findTransactionsByTransactionDate();
     }
 }

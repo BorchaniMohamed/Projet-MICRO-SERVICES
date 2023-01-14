@@ -20,8 +20,8 @@
           <div class="panel panel-primary">
             <div class="number">
               <h3>
-                <h3>20</h3>
-                <small>New customers</small>
+                <h3>{{nbnewclients}}</h3>
+                <small>New Clients</small>
               </h3>
             </div>
             <div class="icon">
@@ -37,8 +37,8 @@
           <div class="panel panel-primary">
             <div class="number">
               <h3>
-                <h3>34</h3>
-                <small>New Invoices</small>
+                <h3>{{nbnewfactures}}</h3>
+                <small>New Factures</small>
               </h3>
             </div>
             <div class="icon">
@@ -54,8 +54,8 @@
           <div class="panel panel-primary">
             <div class="number">
               <h3>
-                <h3>56</h3>
-                <small>New Products</small>
+                <h3>{{nbnewfprduits}}</h3>
+                <small>NEW Produits</small>
               </h3>
             </div>
             <div class="icon">
@@ -71,8 +71,8 @@
           <div class="panel panel-primary">
             <div class="number">
               <h3>
-                <h3>80</h3>
-                <small>Currency</small>
+                <h3>{{newtransactions}}</h3>
+                <small>New Transactions</small>
               </h3>
             </div>
             <div class="icon">
@@ -152,8 +152,8 @@
     </div><!--/.row-->
 
 
-    <div class="row hide">
-      <div class="col-md-5 hide">
+    <div class="row " hidden>
+      <div class="col-md-5 ">
         <div class="panel panel-default">
           <div class="panel-heading">
             Line Chart
@@ -177,7 +177,7 @@
       </div>
 
     </div>
-    <div class="row hide">
+    <div class="row " hidden>
       <div class="col-md-9 col-sm-12 col-xs-12 hiden">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -208,7 +208,7 @@
 
 
     <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-4 col-sm-12 col-xs-12">
         <div class="panel panel-default">
           <div class="panel-heading">
             Clients fidèles
@@ -216,22 +216,18 @@
           <div class="panel-body">
             <div class="list-group">
 
+              <tr *ngFor="let p of tableauinfo" class="list-group-item">
+                <td class="badge">CA = {{getCA(p)[1]}}</td>
+                <td><i class="fa fa-fw fa-truck"></i> {{getCA(p)[0]}}</td>
+              </tr>
 
-              <a *ngFor="let p of tableauinfo| keyvalue" class="list-group-item">
-                <span class="badge">CA = {{p.value}}</span>
-                <i class="fa fa-fw fa-truck"></i> {{p.key}}
-              </a>
 
-
-            </div>
-            <div class="text-right">
-              More Tasks <i class="fa fa-arrow-circle-right"></i>
             </div>
           </div>
         </div>
 
       </div>
-      <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-8 col-sm-12 col-xs-12">
 
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -284,8 +280,37 @@
                 <tr *ngFor="let p of resultCAClient">
                   <td>{{p.cutomerid}}</td>
                   <td>{{p.customername}}</td>
-                  <td>{{p.payedfacture}}</td>
-                  <td>{{p.nonpayedfacture}}</td>
+                  <td>
+
+                    <table >
+                      <tr *ngFor="let pfp of p.invoicespayed">
+                        <th class="px-2">
+                          {{pfp.id }}
+                        </th>
+                        <th class="px-2">
+                          {{pfp.invoiceDate | date }}
+                        </th>
+                        <th class="px-2">
+                          {{pfp.amount  }}
+                        </th>
+                      </tr>
+                    </table>
+                  </td>
+                  <td>
+                    <table>
+                      <tr *ngFor="let pfp of p.invoicesnotpayed">
+                        <th class="px-2">
+                          {{pfp.id }}
+                        </th>
+                        <th class="px-2">
+                          {{pfp.invoiceDate | date }}
+                        </th>
+                        <th class="px-2">
+                          {{pfp.amount  }}
+                        </th>
+                      </tr>
+                    </table>
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -315,7 +340,50 @@
                 <tr *ngFor="let p of resultCAClient">
                   <td>{{p.cutomerid}}</td>
                   <td>{{p.customername}}</td>
-                  <td>{{p.stockItems}}</td>
+                  <td>
+                    <table>
+                      <tr *ngFor="let pfp of p.stockItems | keyvalue">
+                        <th class="px-2">
+                          {{pfp.key }}
+                        </th>
+                        <th class="px-2">
+                          {{pfp.value}}
+                        </th>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Chiffres d'affaires Par Année Par Client
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Nom Client</th>
+                  <th *ngFor="let ann of distinctAnnee" >{{ann}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let p of resultCAClient">
+                  <td>{{p.cutomerid }}</td>
+                  <td *ngFor="let ann of distinctAnnee" >
+                    {{recupCAparanne(p.cutomerid,ann)}}
+                  </td>
                 </tr>
                 </tbody>
               </table>

@@ -3,6 +3,7 @@ package org.ms.factureprojetservice.web;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.ms.factureprojetservice.dto.CAparAnnee;
+import org.ms.factureprojetservice.dto.RangProduit;
 import org.ms.factureprojetservice.dto.StatistiqueClient;
 import org.ms.factureprojetservice.entities.Invoice;
 import org.ms.factureprojetservice.entities.InvoiceLine;
@@ -113,12 +114,10 @@ public class InvoiceController {
     }
 
     @GetMapping("stockItembycustomer/{id}")
-    public Map<Long, Long> stockItembycustomer(@PathVariable Long id)
+    public Map<String, Long> stockItembycustomer(@PathVariable Long id)
     {return invoiceService.STOCK_ITEMSByCustomerID(id);}
 
-    @GetMapping("bestcustomer")
-    public  Map<Long,Double> bestcustomer()
-    {return invoiceService.bestcustomer();}
+
 
     @GetMapping("bestcustomer2")
     public  List<Map.Entry<Long, Double>> bestcustomer2()
@@ -135,5 +134,9 @@ public class InvoiceController {
     @GetMapping("updateDateFacture")
     public Invoice updateDateFacture(@PathVariable Long id,@PathVariable Date date)
     {return invoiceService.updateInvoiceDate(id,date);}
+
+    @GetMapping("ragproduit")
+    public List<RangProduit> rangProduits ()
+    {return invoiceService.rangproduit();}
 
 }

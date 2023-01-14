@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Facture} from "../model/facture.model";
 import {LigneFacture} from "../model/ligneFacture.model";
+import {RangProduit} from "../model/RangProduit";
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class FactureService {
     return this.http.get<Facture>(this.url+'invoices/'+id);
   }
   getBestClients = (): Observable<any> => {
-    return this.http.get<any>(this.url+'bestcustomer');
+    return this.http.get<any>(this.url+'bestcustomer2');
   };
   GetCAByIDClient(id:any):Observable<any>{
     return this.http.get<any>(this.url+'cabycustomer/'+id);
@@ -48,6 +49,15 @@ export class FactureService {
   getstatistiqueclient():Observable<any>{
     return this.http.get<any>(this.url+'statistiqueclient/');
   }
+  getstatistiqueclientCaParAnnee():Observable<any>{
+    return this.http.get<any>(this.url+'caparanneparclient/');
+  }
+
+  getrangproduit():Observable<RangProduit[]>{
+    return this.http.get<RangProduit[]>(this.url+'ragproduit/');
+  }
+
+
 
 
 }

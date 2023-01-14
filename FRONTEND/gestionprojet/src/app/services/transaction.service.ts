@@ -12,10 +12,13 @@ url="http://localhost:8024/";
   getAllTransaction =():Observable<Transaction[]> =>{
     return this.http.get<Transaction[]>(this.url+"transactions");
   };
-  AddTransaction(transction:Transaction):Observable<Transaction>{
+  AddTransaction(transction:Transaction,montantdevise:number):Observable<Transaction>{
     console.log(JSON.stringify(transction));
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post<Transaction>(this.url+"transactions",transction,{headers:headers});
+    return this.http.post<Transaction>(this.url+"transactions/"+montantdevise,transction,{headers:headers});
   };
+  GetNewTransaction():Observable<Transaction[]>{
+    return this.http.get<Transaction[]>(this.url+"newtransactions");
+  }
 
 }
