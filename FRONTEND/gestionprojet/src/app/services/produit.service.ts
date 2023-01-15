@@ -15,6 +15,11 @@ export class ProduitService {
   getAllProducts = (): Observable<Produit[]> => {
     return this.http.get<Produit[]>(this.url+'stockItems');
   };
+
+  getlisteProduitrepturestock = (): Observable<Produit[]> => {
+    return this.http.get<Produit[]>(this.url+'listeproduitsenrepture');
+  };
+
   getAllCategories =():Observable<CategorieProduit[]> =>
     {
       return this.http.get<CategorieProduit[]>(this.url+'stockItemCategories');
@@ -39,6 +44,10 @@ export class ProduitService {
   }
   GetProduit(id:any):Observable<Produit>{
     return this.http.get<Produit>(this.url+'stockItems/'+id);
+  }
+
+  getproduitrepture():Observable<number>{
+    return this.http.get<number>(this.url+'produitsrepture/');
   }
 
   UpdateProduit(id:any,produit:Produit):Observable<Produit>{

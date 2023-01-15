@@ -13,4 +13,6 @@ public interface ProductService {
     StockItem update(StockItem stockItem);
     List<StockItem> findNewStockItem();
     StockItem updatePrix (Long id,Integer nouvelleqte);
+    Integer produitrepture();
+    List<StockItem> produitrepturestock();
 }

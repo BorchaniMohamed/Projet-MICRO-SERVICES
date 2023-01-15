@@ -47,5 +47,10 @@ public class TransactionServiceImpl implements TransactionService{
         return transactions;
     }
 
+    @Override
+    public Integer findTransactionsByDevise() {
+        return payementRepository.findTransactionsByDevise();
+    }
+
 
 }

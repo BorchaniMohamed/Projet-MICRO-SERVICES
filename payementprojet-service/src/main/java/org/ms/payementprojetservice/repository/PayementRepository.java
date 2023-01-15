@@ -15,6 +15,12 @@ public interface PayementRepository extends JpaRepository<Transaction, Long> {
             "and month(t.transactionDate) = month(?1) " +
             "and day(t.transactionDate) = day(?1)")
     List<Transaction> findTransactionsByTransactionDate(Date date);
+
+    @Query("select count (distinct t.devise) from Transaction t")
+    Integer findTransactionsByDevise();
+
+
+
 }
 
 

@@ -46,4 +46,10 @@ public class TransactionController {
     public List<Transaction> newtransactions(){
         return transactionService.findTransactionsByTransactionDate();
     }
+
+
+    @GetMapping("nbdevices")
+    public Integer nbdevices(){
+        return transactionService.findTransactionsByDevise();
+    }
 }

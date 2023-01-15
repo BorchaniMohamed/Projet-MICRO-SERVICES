@@ -47,7 +47,7 @@ import {EditTransactionComponent} from './transactions/edit-transaction/edit-tra
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

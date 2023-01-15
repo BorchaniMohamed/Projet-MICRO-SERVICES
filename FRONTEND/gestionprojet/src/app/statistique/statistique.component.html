@@ -84,6 +84,76 @@
       </div>
 
     </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-12 col-xs-12">
+        <div class="board">
+          <div class="panel panel-primary">
+            <div class="number">
+              <h3>
+                <h3>{{ca}}</h3>
+                <small>CA</small>
+              </h3>
+            </div>
+            <div class="icon">
+              <i class="fa fa-camera-retro fa-5x red"></i>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-12 col-xs-12">
+        <div class="board">
+          <div class="panel panel-primary">
+            <div class="number">
+              <h3>
+                <h3>{{dettes}}</h3>
+                <small>Dettes Client</small>
+              </h3>
+            </div>
+            <div class="icon">
+              <i class="fa fa-exclamation fa-5x blue"></i>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-12 col-xs-12">
+        <div class="board">
+          <div class="panel panel-primary">
+            <div class="number">
+              <h3>
+                <h3>{{repture}}</h3>
+                <small>Produit en repture</small>
+              </h3>
+            </div>
+            <div class="icon">
+              <i class="fa fa-eye-slash fa-5x green"></i>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-12 col-xs-12">
+        <div class="board">
+          <div class="panel panel-primary">
+            <div class="number">
+              <h3>
+                <h3>{{useddevise}}</h3>
+                <small>Used Devise</small>
+              </h3>
+            </div>
+            <div class="icon">
+              <i class="fa fa-eur fa-5x yellow"></i>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
     <div class="row hide">
       <div class="col-sm-6 col-xs-12">
         <div class="panel panel-default chartJs">
@@ -116,8 +186,8 @@
       <div class="col-xs-6 col-md-3">
         <div class="panel panel-default">
           <div class="panel-body easypiechart-panel">
-            <h4>Profit</h4>
-            <div class="easypiechart" id="easypiechart-blue" data-percent="50" ><span class="percent">50%</span>
+            <h4>Dettes/CA</h4>
+            <div class="easypiechart" id="easypiechart-blue" data-percent="53" ><span class="percent">{{((dettes*100)/ca).toFixed(2)}}%</span>
             </div>
           </div>
         </div>
@@ -125,8 +195,8 @@
       <div class="col-xs-6 col-md-3">
         <div class="panel panel-default">
           <div class="panel-body easypiechart-panel">
-            <h4>Sales</h4>
-            <div class="easypiechart" id="easypiechart-orange" data-percent="20" ><span class="percent">20%</span>
+            <h4>Produits en repture</h4>
+            <div class="easypiechart" id="easypiechart-orange" data-percent="18"><span class="percent">{{(repture*100/nbprod).toFixed(2)}}%</span>
             </div>
           </div>
         </div>
@@ -134,8 +204,8 @@
       <div class="col-xs-6 col-md-3">
         <div class="panel panel-default">
           <div class="panel-body easypiechart-panel">
-            <h4>Customers</h4>
-            <div class="easypiechart" id="easypiechart-teal" data-percent="10" ><span class="percent">10%</span>
+            <h4>Clients passif</h4>
+            <div class="easypiechart" id="easypiechart-teal" data-percent="8"><span class="percent">{{(x*100/nbclient).toFixed(2)}}%</span>
             </div>
           </div>
         </div>
@@ -143,8 +213,8 @@
       <div class="col-xs-6 col-md-3">
         <div class="panel panel-default">
           <div class="panel-body easypiechart-panel">
-            <h4>No. of Visits</h4>
-            <div class="easypiechart" id="easypiechart-red" data-percent="90" ><span class="percent">90%</span>
+            <h4>Produits passif</h4>
+            <div class="easypiechart" id="easypiechart-red" data-percent="25"><span class="percent">{{(y*100/nbprod).toFixed(2)}}%</span>
             </div>
           </div>
         </div>
@@ -204,9 +274,6 @@
     <!-- /. ROW  -->
 
 
-
-
-
     <div class="row">
       <div class="col-md-4 col-sm-12 col-xs-12">
         <div class="panel panel-default">
@@ -249,7 +316,7 @@
                   <td>{{p.cutomerid}}</td>
                   <td>{{p.customername}}</td>
                   <td>{{p.ca}}</td>
-                  <td>{{p.reste}}</td>
+                  <td class="text-center"><span class="badge">{{p.reste}}</span></td>
                 </tr>
                 </tbody>
               </table>
@@ -259,66 +326,165 @@
 
       </div>
 
-      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Les factures réglées et les factures non encore réglées
+            </div>
+            <div class="panel-body">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#home" data-toggle="tab">Les factures réglées</a>
+                </li>
+                <li class=""><a href="#profile" data-toggle="tab">Les factures non réglées</a>
+                </li>
+              </ul>
 
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            Les factures réglées et les factures non encore réglées par Client globalement
-          </div>
-          <div class="panel-body">
-            <div class="table-responsive">
-              <table class="table table-striped table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nom</th>
-                  <th>Fac payées</th>
-                  <th>Fac non payées</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let p of resultCAClient">
-                  <td>{{p.cutomerid}}</td>
-                  <td>{{p.customername}}</td>
-                  <td>
-
-                    <table >
-                      <tr *ngFor="let pfp of p.invoicespayed">
-                        <th class="px-2">
-                          {{pfp.id }}
-                        </th>
-                        <th class="px-2">
-                          {{pfp.invoiceDate | date }}
-                        </th>
-                        <th class="px-2">
-                          {{pfp.amount  }}
-                        </th>
+              <div class="tab-content">
+                <div class="tab-pane fade active in" id="home">
+                  <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                      <th>id</th>
+                      <th class="col-lg-2">Nom</th>
+                      <th class="col-lg-2">Nb factures</th>
+                      <th class="col-lg-7">Fac payées</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let p of resultCAClient">
+                      <td class="bg"><span class="badge">{{p.cutomerid}}</span></td>
+                      <td>{{p.customername}}</td>
+                      <td>{{p.invoicespayed.length}}</td>
+                      <td>
+                        <table class="table bg-warning table-striped table-bordered">
+                          <thead>
+                          <tr>
+                          <th>Id</th>
+                          <th>Date</th>
+                          <th>Montant</th>
+                          <th>Nb Produit</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let pfp of p.invoicespayed">
+                            <td class="bg-success">{{pfp.id}}</td>
+                            <td class="bg-success">{{pfp.invoiceDate | date:'shortDate' }}</td>
+                            <td class="bg-success">{{pfp.amount}}</td>
+                            <td class="bg-success">{{pfp.invoiceLines.length}}</td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tab-pane fade" id="profile">
+                  <div class="tab-pane fade active in" id="home">
+                    <table class="table table-striped table-bordered table-hover">
+                      <thead>
+                      <tr>
+                        <th>id</th>
+                        <th class="col-lg-2">Nom</th>
+                        <th class="col-lg-2">Nb factures</th>
+                        <th class="col-lg-7">Fac non payées</th>
                       </tr>
-                    </table>
-                  </td>
-                  <td>
-                    <table>
-                      <tr *ngFor="let pfp of p.invoicesnotpayed">
-                        <th class="px-2">
-                          {{pfp.id }}
-                        </th>
-                        <th class="px-2">
-                          {{pfp.invoiceDate | date }}
-                        </th>
-                        <th class="px-2">
-                          {{pfp.amount  }}
-                        </th>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let p of resultCAClient">
+                        <td class="bg"><span class="badge">{{p.cutomerid}}</span></td>
+                        <td>{{p.customername}}</td>
+                        <td>{{p.invoicesnotpayed.length}}</td>
+                        <td>
+                          <table class="table bg-warning table-striped table-bordered">
+                            <thead>
+                            <tr>
+                            <th>Id</th>
+                            <th>Date</th>
+                            <th>Montant</th>
+                            <th>Nb Produit</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let pfp of p.invoicesnotpayed">
+                              <td class="bg-danger">{{pfp.id}}</td>
+                              <td class="bg-danger">{{pfp.invoiceDate | date:'shortDate' }}</td>
+                              <td class="bg-danger">{{pfp.amount}}</td>
+                              <td class="bg-danger">{{pfp.invoiceLines.length}}</td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </td>
                       </tr>
+                      </tbody>
                     </table>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-      </div>
+
+      <!-- /. ROW  -->
+<!--      <div class="col-md-12 col-sm-12 col-xs-12">-->
+<!--        <div class="panel panel-default">-->
+<!--          <div class="panel-heading">-->
+<!--            Les factures réglées et les factures non encore réglées par Client globalement-->
+<!--          </div>-->
+<!--          <div class="panel-body">-->
+<!--            <div class="table-responsive">-->
+<!--              <table class="table table-striped table-bordered table-hover">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                  <th>id et Nom</th>-->
+<!--                  <th class="col-lg-5">Fac payées</th>-->
+<!--                  <th class="col-lg-5">Fac non payées</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr *ngFor="let p of resultCAClient">-->
+<!--                  <td class="bg"><span class="badge">{{p.cutomerid}}</span> {{p.customername}}</td>-->
+<!--                  <td>-->
+
+<!--                    <table class="table bg-warning table-striped table-bordered">-->
+<!--                      <thead>-->
+<!--                      <th>Id</th>-->
+<!--                      <th>Date</th>-->
+<!--                      <th>Montant</th>-->
+<!--                      </thead>-->
+<!--                      <tbody>-->
+<!--                      <tr *ngFor="let pfp of p.invoicespayed">-->
+<!--                        <td class="bg-success">{{pfp.id }}</td>-->
+<!--                        <td class="bg-success">{{pfp.invoiceDate | date:'shortDate' }}</td>-->
+<!--                        <td class="bg-success">{{pfp.amount}}</td>-->
+<!--                      </tr>-->
+<!--                      </tbody>-->
+<!--                    </table>-->
+<!--                  </td>-->
+<!--                  <td>-->
+<!--                    <table class="table bg-warning table-striped table-bordered">-->
+<!--                      <thead>-->
+<!--                      <th>Id</th>-->
+<!--                      <th>Date</th>-->
+<!--                      <th>Montant</th>-->
+<!--                      </thead>-->
+<!--                      <tbody>-->
+<!--                      <tr *ngFor="let pfp of p.invoicesnotpayed">-->
+<!--                        <td class="bg-danger">{{pfp.id }}</td>-->
+<!--                        <td class="bg-danger">{{pfp.invoiceDate | date:'shortDate' }}</td>-->
+<!--                        <td class="bg-danger">{{pfp.amount}}</td>-->
+<!--                      </tr>-->
+<!--                    </table>-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--              </table>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--      </div>-->
 
       <div class="col-md-12 col-sm-12 col-xs-12">
 
@@ -341,7 +507,14 @@
                   <td>{{p.cutomerid}}</td>
                   <td>{{p.customername}}</td>
                   <td>
-                    <table>
+                    <table class="table table-striped table-bordered table-hover">
+                      <thead>
+                      <tr>
+                        <th>id produit et nom</th>
+                        <th>fréquence produit</th>
+                      </tr>
+                      </thead>
+                      <tbody>
                       <tr *ngFor="let pfp of p.stockItems | keyvalue">
                         <th class="px-2">
                           {{pfp.key }}
@@ -362,7 +535,6 @@
       </div>
 
 
-
       <div class="col-md-12 col-sm-12 col-xs-12">
 
         <div class="panel panel-default">
@@ -375,14 +547,14 @@
                 <thead>
                 <tr>
                   <th>Nom Client</th>
-                  <th *ngFor="let ann of distinctAnnee" >{{ann}}</th>
+                  <th *ngFor="let ann of distinctAnnee">{{ann}}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let p of resultCAClient">
                   <td>{{p.cutomerid }}</td>
-                  <td *ngFor="let ann of distinctAnnee" >
-                    {{recupCAparanne(p.cutomerid,ann)}}
+                  <td *ngFor="let ann of distinctAnnee">
+                    {{recupCAparanne(p.cutomerid, ann)}}
                   </td>
                 </tr>
                 </tbody>
@@ -390,11 +562,74 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
-    <!-- /. ROW  -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
 
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Les produits les plus vendus
+              <br><br>
+              <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" (click)="updateproductrang(anneeproductrank)">Go!</button>
+                    </span>
+                  <input type="text" class="form-control" placeholder="Changer l'année" [(ngModel)]="anneeproductrank">
+                </div><!-- /input-group -->
+              </div><!-- /.col-lg-6 -->
+            </div>
+            <div class="panel-body">
+              <div class="chart-container">
+                <canvas id="ProductRankChart">{{ chartProductRank }}</canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Les produits en rupture de stock
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nom Produits</th>
+                  <th>Prix</th>
+                  <th>Catégorie</th>
+                  <th>Marque</th>
+                  <th>Caractéristiques</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let p of produitrepture">
+                  <td>{{p.id}}</td>
+                  <td>{{p.stockItemName}}</td>
+                  <td>{{p.price}}</td>
+                  <td>{{p.categorie.stockItemCategoryName}}</td>
+                  <td>{{p.brand}}</td>
+                  <td>{{p.carateristique}}</td>
+                </tr>
+                </tbody>
+              </table>
+          </div>
+
+    </div>
+
+
+
+
+    <!-- /. ROW  -->
+    <!--    <div class="chart-container">-->
+    <!--      <canvas  id="MyChart" >{{ chart }}</canvas>-->
+    <!--    </div>-->
 
 
   </div>

@@ -24,6 +24,11 @@ public class ProductController {
         List<StockItem> all = productService.findAll();
         return all;
     }
+
+    @GetMapping("/listeproduitsenrepture")
+    private List<StockItem> listeproduitsenrepture(){
+        return productService.produitrepturestock();
+    }
     @GetMapping("/newstockItems")
     private List<StockItem> findNewstockItems(){
         List<StockItem> all = productService.findNewStockItem();
@@ -45,6 +50,12 @@ public class ProductController {
     private List<Fournisseur> findAllAdresses(){
         List<Fournisseur> all = fournisseurService.findAll();
         return all;
+    }
+
+    @GetMapping("/produitsrepture")
+    private Integer produitsrepture(){
+        return productService.produitrepture();
+
     }
 
 

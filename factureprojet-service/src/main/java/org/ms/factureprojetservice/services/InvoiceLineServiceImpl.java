@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.ms.factureprojetservice.entities.InvoiceLine;
 import org.ms.factureprojetservice.feign.ProduitServiceClient;
+import org.ms.factureprojetservice.model.stockItem.StockItem;
 import org.ms.factureprojetservice.repository.InvoiceLineRepository;
 import org.ms.factureprojetservice.repository.InvoiceRepository;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class InvoiceLineServiceImpl implements InvoiceLineService{
     private InvoiceLineRepository invoiceLineRepository;
     private InvoiceRepository invoiceRepository;
     private ProduitServiceClient produitServiceClient;
+
 
     @Override
     public void deleteById(Long id) throws IOException {
@@ -42,6 +44,20 @@ public class InvoiceLineServiceImpl implements InvoiceLineService{
     @Override
     public List<InvoiceLine> findAll() {
         return invoiceLineRepository.findAll();
+    }
+
+    @Override
+    public Integer findInvoiceLineByStockItemId() {
+        Integer res = 0;
+        List<StockItem> all = produitServiceClient.getAllProduits();
+        for(StockItem stockItem:all)
+        {
+            if(invoiceLineRepository.findInvoiceLineByStockItemId(stockItem.getId())==0)
+            {
+                res=res+1;
+            }
+        }
+        return res;
     }
 
 }

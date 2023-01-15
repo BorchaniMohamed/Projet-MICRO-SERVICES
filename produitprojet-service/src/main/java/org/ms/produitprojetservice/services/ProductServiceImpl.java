@@ -82,4 +82,14 @@ public class ProductServiceImpl implements ProductService{
         }
         return stockItemRepository.save(stockItem);
     }
+
+    @Override
+    public Integer produitrepture() {
+        return stockItemRepository.produitrepture();
+    }
+
+    @Override
+    public List<StockItem> produitrepturestock() {
+        return stockItemRepository.produitrepturestock();
+    }
 }

@@ -16,6 +16,8 @@ import org.ms.factureprojetservice.repository.InvoiceRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -242,9 +244,13 @@ public class InvoiceServiceImpl implements InvoiceService {
         List<RangProduit> res = new ArrayList<>();
 
         Map<Integer, Map<Long, List<InvoiceLine>>> ligneFactureParDateParProduiId = invoiceLineRepository.findAll().stream()
-                .collect(Collectors.groupingBy(lf -> lf.getInvoice().getInvoiceDate().getYear(), // Par Date
+                .collect(Collectors.groupingBy(lf -> {
+                            Date date = lf.getInvoice().getInvoiceDate();
+                            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                            return localDate.getYear();
+                        }, // Par Year
                         Collectors.groupingBy(InvoiceLine::getStockItemId)));// Par produit Id
-
+        log.info(ligneFactureParDateParProduiId.toString());
         ligneFactureParDateParProduiId.forEach((year, longListMap) -> {
             longListMap.forEach((produitId, invoiceLines) -> {
                 StockItem product = produitServiceClient.findProductById(produitId);
@@ -258,6 +264,29 @@ public class InvoiceServiceImpl implements InvoiceService {
                         .build());
             });
         });
+        log.info(res.toString());
+        res.sort(Comparator.comparing(RangProduit::getQteVendue));
+        return res;
+    }
+    @Override
+    public List<RangProduit> rangproduit2() {
+        List<RangProduit> res = new ArrayList<>();
+
+        Map<Long, List<InvoiceLine>> ligneFactureParProduitId = invoiceLineRepository.findAll().stream()
+                .collect(Collectors.groupingBy(InvoiceLine::getStockItemId));// Par produit Id
+
+        ligneFactureParProduitId.forEach((produitId, invoiceLines) -> {
+            StockItem product = produitServiceClient.findProductById(produitId);
+            Integer qteVendu = invoiceLines.stream().map(InvoiceLine::getQuantity).reduce(Integer::sum).orElse(0);
+            double prixTotal = invoiceLines.stream().mapToDouble(InvoiceLine::getAmountinvoiveline).reduce(Double::sum).orElse(0.);
+            res.add(RangProduit.builder()
+                            .stockItem(product)
+                            .year(0)
+                            .qteVendue(qteVendu)
+                            .prixTotal(prixTotal)
+                    .build());
+        });
+        log.info(res.toString());
         res.sort(Comparator.comparing(RangProduit::getQteVendue));
         return res;
     }
@@ -317,4 +346,30 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         return cAparAnnees;
     }
+
+    @Override
+    public Double chiffreaffaire() {
+        return invoiceRepository.chiffreaffaire();
+    }
+
+    @Override
+    public Double dettesclients() {
+        return invoiceRepository.dettesclients();
+    }
+
+    @Override
+    public Integer clientnonactifs() {
+        List<Customer> all=clientServiceClient.findAllCustomers();
+        List<Customer> res = new ArrayList<>();
+        for(Customer customer:all)
+        {
+            if(invoiceRepository.findInvoicesByCustomerId(customer.getId())==null)
+            {
+                res.add(customer);
+            }
+        }
+        return res.size();
+    }
+
+
 }

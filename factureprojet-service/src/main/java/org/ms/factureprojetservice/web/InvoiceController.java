@@ -138,5 +138,24 @@ public class InvoiceController {
     @GetMapping("ragproduit")
     public List<RangProduit> rangProduits ()
     {return invoiceService.rangproduit();}
+    @GetMapping("ragproduit2")
+    public List<RangProduit> rangProduits2 ()
+    {return invoiceService.rangproduit2();}
+
+    @GetMapping("chiffreaffaire")
+    public Double chiffreaffaire ()
+    {return invoiceService.chiffreaffaire();}
+
+    @GetMapping("dettesclients")
+    public Double dettesclients ()
+    {return invoiceService.dettesclients();}
+
+    @GetMapping("clientnonactif")
+    public Integer clientnonactif ()
+    {return invoiceService.clientnonactifs();}
+
+    @GetMapping("produitpassif")
+    public Integer produitpassif ()
+    {return invoiceLineService.findInvoiceLineByStockItemId();}
 
 }

@@ -35,9 +35,16 @@ public interface InvoiceService {
 
     List<RangProduit> rangproduit();
 
+    List<RangProduit> rangproduit2();
+
     List<StatistiqueClient> statistique();
 
     List<CAparAnnee> C_APAR_ANNEES();
+
+    Double chiffreaffaire();
+    Double dettesclients();
+
+    Integer clientnonactifs();
 
 //    List<ChiffreAffaireParClient> chiffreAffaireClient(Long id);
 

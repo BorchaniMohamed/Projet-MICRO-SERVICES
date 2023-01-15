@@ -15,6 +15,14 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     @Query("select sum(i.amount) as CA from Invoice i where i.customerId = ?1")
     Double findInvoicesByCustomerId(Long id);
 
+    @Query("select sum(i.amount) as CA from Invoice i")
+    Double chiffreaffaire();
+
+    @Query("select sum(i.amount) as CA from Invoice i where i.states='non payée' ")
+    Double dettesclients();
+
+
+
     @Query("select sum(i.amount) as CA from Invoice i where i.customerId = ?1 and i.states='non payée' ")
     Double findNonPayeeInvoicesByCustomerId(Long id);
 
@@ -37,6 +45,8 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     @Modifying
     @Query("update Invoice i set i.invoiceDate=?2 where i.id = ?1")
     void updateInvoiceDate(Long id, Date date);
+
+
 
 
 

@@ -20,5 +20,6 @@ url="http://localhost:8024/";
   GetNewTransaction():Observable<Transaction[]>{
     return this.http.get<Transaction[]>(this.url+"newtransactions");
   }
-
-}
+  getnbdevise():Observable<number>{
+    return this.http.get<number>(this.url+"nbdevices");
+  }}

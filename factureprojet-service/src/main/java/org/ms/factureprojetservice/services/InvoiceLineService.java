@@ -10,4 +10,6 @@ public interface InvoiceLineService {
     InvoiceLine save(InvoiceLine invoiceLine);
     InvoiceLine findById(Long id);
     List<InvoiceLine> findAll();
+
+    Integer findInvoiceLineByStockItemId();
 }

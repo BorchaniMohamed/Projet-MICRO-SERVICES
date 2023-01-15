@@ -57,7 +57,21 @@ export class FactureService {
     return this.http.get<RangProduit[]>(this.url+'ragproduit/');
   }
 
+  getrangproduit2():Observable<RangProduit[]>{
+    return this.http.get<RangProduit[]>(this.url+'ragproduit2/');
+  }
+
+  getCA = (): Observable<number> => {
+    return this.http.get<number>(this.url+'chiffreaffaire');
+  };
+  getdettes = (): Observable<number> => {
+    return this.http.get<number>(this.url+'dettesclients');
+  };
 
 
+  getpassifclient=() :Observable<number> => {
+  return this.http.get<number>(this.url+'clientnonactif');}
 
+  getpassifproduits=() :Observable<number> => {
+    return this.http.get<number>(this.url+'produitpassif');}
 }

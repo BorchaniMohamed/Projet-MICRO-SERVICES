@@ -12,6 +12,6 @@ public interface TransactionService {
     List<Transaction> findAll();
 
     List<Transaction> findTransactionsByTransactionDate();
-
+    Integer findTransactionsByDevise();
 
 }
